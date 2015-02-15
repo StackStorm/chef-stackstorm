@@ -1,0 +1,15 @@
+# <%= @service_name %> Service
+
+description     "StackStorm service <%= @service_name %>"
+author          "chef-client"
+
+start on starting st2actionrunner
+stop on starting st2actionrunner
+
+respawn
+respawn limit 2 5
+
+umask 007
+kill timeout 60
+
+exec sudo -u <%= @runas_user %> -g <%= @runas_group %> python <%= @service_bin %> --config-file <%= "#{@config_file}" %>

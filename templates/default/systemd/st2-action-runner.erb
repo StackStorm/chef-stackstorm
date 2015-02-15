@@ -1,0 +1,11 @@
+[Unit]
+Description=StackStorm action runner master service
+After=syslog.target
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+
+[Install]
+WantedBy=multi-user.target

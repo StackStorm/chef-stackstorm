@@ -1,0 +1,17 @@
+# <%= @service_name %> Service
+
+description     "StackStorm service <%= @service_name %>"
+author          "chef-client"
+
+start on filesystem and net-device-up IFACE!=lo
+stop on starting rc RUNLEVEL=[016]
+
+setuid <%= @runas_user %>
+setgid <%= @runas_group %>
+respawn
+respawn limit 2 5
+
+umask 007
+kill timeout 60
+
+exec <%= @python %> <%= @service_bin %> --config-file <%= @config_file %>

@@ -1,0 +1,17 @@
+[Unit]
+Description=StackStorm service <%= @service_name %>
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=<%= @runas_user %>
+Group=<%= @runas_group %>
+ExecStart=<%= @python %> <%= @service_bin %> --config-file <%= @config_file %>
+TimeoutSec=60
+PrivateTmp=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
