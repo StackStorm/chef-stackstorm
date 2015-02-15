@@ -16,7 +16,7 @@ Packaging for **St2** is currently done via *apt* or *rpm* packages, which can b
 ### Common attributes
 
 | Key | Type | Description | Default |
-| --- | :---: | :--- | :---: |
+| --- | --- | --- | --- |
 | `['stackstorm']['install_method']` | String | StackStorm installation method. | `'system_wide'` |
 | `['stackstorm']['version']` | String | Version of stack **St2** to be installed.  | `'0.7'` |
 | `['stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
@@ -33,7 +33,7 @@ Packaging for **St2** is currently done via *apt* or *rpm* packages, which can b
 ### User management
 
 | Key | Type | Description | Default |
-| --- | :---: | :--- | :---: |
+| --- | --- | --- | --- |
 | `['stackstorm']['user']['user']` | String | System user used by stackstorm stack. | `'stanley'` |
 | `['stackstorm']['user']['group']` | String | System group used by stackstorm stack. | `'stanley'` |
 | `['stackstorm']['user']['home']` | String | Path to stanley's home directoy. | `'/home/stanley'` |
