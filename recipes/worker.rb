@@ -71,8 +71,6 @@ end
     case service_provider
     when :debian, :init
       mode '0755'
-    when :systemd
-      notifies :run, "execute[st2-systemctl-daemon-reload]"
     end
   end
 

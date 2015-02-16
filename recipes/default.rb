@@ -71,8 +71,3 @@ template "#{node['stackstorm'][:etc_dir]}/st2.conf" do
   variables lazy { {config: node['stackstorm']['config']} }
   action :create
 end
-
-execute "st2-systemctl-daemon-reload" do
-  command 'systemctl daemon-reload'
-  action :nothing
-end

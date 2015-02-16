@@ -65,8 +65,6 @@ services.each do |service_name, data|
     case service_provider
     when :debian, :redhat
       mode '0755'
-    when :systemd
-      notifies :run, "execute[st2-systemctl-daemon-reload]"
     end
   end
 
