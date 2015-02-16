@@ -1,7 +1,7 @@
 
 # Mongodb cookbook overridings.
 
-node.override['mongodb']['install_method'] = 'distro' 
+node.override['mongodb']['install_method'] = 'distro'
 node.override['mongodb']['package_name']   = 'mongodb-server'
 node.override['mongodb']['user'] = 'mongodb'
 node.override['mongodb']['group'] = 'mongodb'

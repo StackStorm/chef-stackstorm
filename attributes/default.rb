@@ -18,7 +18,7 @@ default['stackstorm']['enable_mistral_workflow'] = false
 # === StackStorm Configuration attributes responsible for generation.
 #
 
-# <---- 
+# <----
 # API listener.
 default['stackstorm']['config']['api'] = {
   host: '0.0.0.0',

@@ -28,7 +28,7 @@ template "#{node['stackstorm'][:etc_dir]}/controller.conf" do
   mode 0644
   source 'st2.conf.erb'
   variables lazy {
-    { 
+    {
       config_name: 'controller',
       config: node['stackstorm']['config']
     }
@@ -59,7 +59,7 @@ services.each do |service_name, data|
         python: node['python']['binary']
       }).merge(data)
     }
-    action :create   
+    action :create
 
     # Provider specific options
     case service_provider

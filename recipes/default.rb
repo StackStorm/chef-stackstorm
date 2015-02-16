@@ -30,7 +30,7 @@ user 'st2' do
   action :create
 end
 
-directory "creating st2 log directory" do
+directory "st2:log_dir" do
   path node['stackstorm']['log_dir']
   owner node['stackstorm']['runas_user']
   group node['stackstorm']['runas_group']

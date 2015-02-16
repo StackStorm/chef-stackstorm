@@ -18,7 +18,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="<%= @service_name %>"
 NAME=<%= @service_name %>
-DAEMON=<%= @python %> 
+DAEMON=<%= @python %>
 DAEMON_ARGS="<%= @service_bin %> --config-file <%= @config_file %>"
 PIDFILE=/var/run/st2actionrunner/$NAME.pid
 SCRIPTNAME=/etc/init.d/<%= @service_name %>

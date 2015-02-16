@@ -40,21 +40,24 @@ module StackstormCookbook
     def service_provider
       @service_provider ||= begin
         supported = [
-          :upstart, :debian, :systemd 
+          :upstart, :debian, :systemd
         ]
         exception = NotImplementedError.new("platform #{node[:platform]} " <<
                         "#{node[:platform_version]} not supported")
-        supported.include?(default_service_provider) and 
-            return default_service_provider
 
+        # --- overrides
         if node.platform == 'ubuntu'
           :upstart
-        elsif node.platform_family? 'debian'
-          :debian
         elsif node.platform_family?('rhel')
           node.platform_version.to_f < 7 ? raise(exception) : :systemd
         elsif node.platform == 'fedora'
           node.platform_version.to_f < 15 ? raise(exception) : :systemd
+
+        # --- fallbacks
+        elsif supported.include? default_service_provider
+          default_service_provider
+        elsif node.platform_family? 'debian'
+          :debian
         else
           raise(exception)
         end

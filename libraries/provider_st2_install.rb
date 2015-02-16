@@ -27,6 +27,15 @@ class Chef
             action :install
           end
         end
+
+        # fix permissions in case if the direcotry created by package.
+        directory "#{new_resource.name} st2:log_dir" do
+          path node['stackstorm']['log_dir']
+          owner node['stackstorm']['runas_user']
+          group node['stackstorm']['runas_group']
+          mode '0755'
+          action :create
+        end
       end
 
       action :remove do
