@@ -37,7 +37,7 @@ template "#{node['stackstorm'][:etc_dir]}/controller.conf" do
 end
 
 # Create register content resource
-# register_content :sensors
+register_content :sensors
 
 selected = %w[ st2api st2sensorcontainer st2history st2rulesengine ]
 services = st2_service_config.select {|k,_| selected.include?(k) }
@@ -70,9 +70,9 @@ services.each do |service_name, data|
     end
   end
 
-  # service service_name do
-  #   provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
-  #   action [ :enable, :start ]
-  # end
+  service service_name do
+    provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
+    action [ :enable, :start ]
+  end
 
 end
