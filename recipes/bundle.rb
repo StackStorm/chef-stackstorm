@@ -9,12 +9,12 @@
 # services which are mongodb, rabbitmq and mysql (used by mistral).
 #
 
+node.override['stackstorm']['roles'] = %w(contoller worker client)
+
 include_recipe 'build-essential::default'
 include_recipe 'stackstorm::_python'
 include_recipe 'git::default'
 include_recipe 'rabbitmq::default'
 include_recipe 'stackstorm::_mongodb'
-include_recipe 'stackstorm::controller'
-include_recipe 'stackstorm::worker'
-include_recipe 'stackstorm::client'
+include_recipe 'stackstorm::default'
 include_recipe 'stackstorm::mistral'

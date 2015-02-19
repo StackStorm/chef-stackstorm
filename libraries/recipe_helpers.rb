@@ -1,73 +1,49 @@
 module StackstormCookbook
   module RecipeHelpers
 
-    def st2_service_config
-      Mash.new({
-        st2api: {
-          service_bin: "#{st2_bin_prefix}/st2api"
-        },
-        st2sensorcontainer: {
-          service_bin: "#{st2_bin_prefix}/sensor_container"
-        },
-        st2history: {
-          service_bin: "#{st2_bin_prefix}/history"
-        },
-        st2rulesengine: {
-          service_bin: "#{st2_bin_prefix}/rules_engine"
-        },
-        st2actionrunner: {
-          service_bin: "#{st2_bin_prefix}/actionrunner",
-          runas_user:  'root',
-          runas_group: 'root'
-        }
-      })
-    end
+    def stackstorm_service(service_name, &block)
+      init_path = service_init_path(service_name)
+      service_provider = self.service_provider
 
-    def st2_bin_prefix
-      @st2_bin_prefix ||= begin
-        case node['stackstorm']['install_method'].to_sym
-        when :system_wide
-          '/usr/bin'
-        else
-          Chef::Log.error("install_method " <<
-            "#{node['stackstorm']['install_method']} is not supported!")
-          raise ArgumentError
+      template "#{recipe_name} :create init template for #{service_name}" do
+        path init_path
+        source "#{service_provider}/st2-init.erb"
+        cookbook 'stackstorm'
+        action :create
+        case service_provider
+        when :debian, :redhat
+          mode '0755'
         end
-      end
+      end.instance_eval(&block)
+
+      # service "#{recipe_name} enable and start StackStorm service #{service_name}" do
+      #   service_name service_name
+      #   provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
+      #   action [ :enable, :start ]
+      # end
     end
 
     # Service provider mapping
     def service_provider
       @service_provider ||= begin
-        supported = [
-          :upstart, :debian, :systemd
-        ]
-        exception = NotImplementedError.new("platform #{node[:platform]} " <<
-                        "#{node[:platform_version]} not supported")
-
-        # --- overrides
-        if node.platform == 'ubuntu'
+        klass = Chef::Platform.find_provider(node.platform,
+                                  node.platform_version, :service)
+        svcprovider = klass.name.split('::').last.downcase.to_sym
+        supported = [ :upstart, :debian, :systemd ]
+        case node.platform
+        when 'ubuntu'
           :upstart
-        elsif node.platform_family?('rhel')
-          node.platform_version.to_f < 7 ? raise(exception) : :systemd
-        elsif node.platform == 'fedora'
-          node.platform_version.to_f < 15 ? raise(exception) : :systemd
-
-        # --- fallbacks
-        elsif supported.include? default_service_provider
-          default_service_provider
-        elsif node.platform_family? 'debian'
+        when 'debian'
           :debian
         else
-          raise(exception)
+          if supported.include?(svcprovider)
+            svcprovider
+          else
+            NotImplementedError.new("platform #{node[:platform]} " <<
+                        "#{node[:platform_version]} not supported")
+          end
         end
       end
-    end
-
-    def default_service_provider
-      @default_service_provider ||= Chef::Platform.find_provider(node.platform,
-                            node.platform_version, :service).name.split('::').
-                              last.downcase.to_sym
     end
 
     def service_init_path(svc_name)
@@ -81,8 +57,8 @@ module StackstormCookbook
       end
     end
 
-    def register_content(*args)
-      content = args.map {|s| "--register-#{s}"}.join(' ')
+    def register_content(opt_list)
+      content = Array(opt_list).map {|s| "--register-#{s}"}.join(' ')
       python_pack = self.python_pack
       conf_path = node['stackstorm']['conf_path']
 
@@ -103,6 +79,20 @@ module StackstormCookbook
       when 'rhel', 'fedora'
         "/usr/lib/python#{pv}/site-packages"
       end
+    end
+
+    # Retrive list of enabled components, and populate attribute.
+    def apply_components
+      at = node['stackstorm']['roles']
+      components = (%w(st2common) + node['stackstorm']['components']).uniq
+      at.include?('controller') and
+            components += %w(st2common st2reactor st2api st2auth)
+      at.include?('worker') and
+            components += %w(st2common st2actions)
+      at.include?('client') and
+            components += %w(st2common st2client)
+
+      node.default['stackstorm']['components'] = components.uniq
     end
 
   end

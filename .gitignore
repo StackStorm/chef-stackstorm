@@ -17,4 +17,5 @@ bin/*
 .bundle/*
 
 .kitchen/
+.chef-runner/
 .kitchen.local.yml
