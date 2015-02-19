@@ -70,13 +70,13 @@ To chose specific roles for a node define `['stackstorm']['roles']` attribute to
 
 ## Invocation
 
-Define roles with the `stackstorm.roles` attribute, provide valid configuration options. And include `"recipe[stackstorm::default]"`. After converging a node, **St2** packages are downloaded, system init files are generated and **StackStorm** service are started.
+Define roles with the `stackstorm.roles` attribute, provide valid configuration options and include `"recipe[stackstorm::default]"` into your run list. Recipe downloads and installs StackStorm packages required for given roles, writes configuration files and filnally brings up StackStorm system services.
 
 **Mind that the valid configuration must be provided such as RabbitMQ and MongoDB endpoints**. Otherwise StackStorm services fail when trying to establish connections.
 
 ### stackstorm::bundle
 
-For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as required components such as *RabbitMQ, MongoDB and Mistral* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into run list.
+For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as all required components such as *RabbitMQ, MongoDB and Mistral* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into your run list.
 
 
 ## License and Authors
