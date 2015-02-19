@@ -7,10 +7,7 @@
 
 # Fetches remote packages from StackStorm repository.
 
-include_recipe 'build-essential::default'
-include_recipe 'stackstorm::_python'
-include_recipe 'git::default'
-include_recipe 'stackstorm::default'
+include_recipe 'stackstorm::_initial'
 
 node.override['stackstorm']['bin_dir'] = '/usr/bin'
 node.override['stackstorm']['python_binary'] = node['python']['binary']

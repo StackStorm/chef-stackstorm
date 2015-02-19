@@ -1,4 +1,3 @@
-
 # Mongodb cookbook overridings.
 
 node.override['mongodb']['install_method'] = 'distro'

@@ -24,9 +24,9 @@ service_bin = node['stackstorm']['service_binary']['st2actionrunner']
 service_bin = "#{node['stackstorm']['bin_dir']}/#{service_bin}"
 
 workers.each do |num|
-  suff = num ? "-#{num}" : ""
-  service_name = "st2actionrunner#{suff}"
-  template_source = "#{service_provider}/st2-action-runner#{suff}.erb"
+  service_name = num ? "st2actionrunner" : "st2actionrunner-#{num}"
+  template_source = num ? "#{service_provider}/st2-action-runner-i.erb" :
+      "#{service_provider}/st2-action-runner.erb" 
 
   stackstorm_service service_name do
     source template_source
