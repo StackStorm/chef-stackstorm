@@ -16,11 +16,11 @@ module StackstormCookbook
         end
       end.instance_eval(&block)
 
-      # service "#{recipe_name} enable and start StackStorm service #{service_name}" do
-      #   service_name service_name
-      #   provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
-      #   action [ :enable, :start ]
-      # end
+      service "#{recipe_name} enable and start StackStorm service #{service_name}" do
+        service_name service_name
+        provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
+        action [ :enable, :start ]
+      end
     end
 
     # Service provider mapping
@@ -85,8 +85,10 @@ module StackstormCookbook
     def apply_components
       at = node['stackstorm']['roles']
       components = (%w(st2common) + node['stackstorm']['components']).uniq
+
+      # mind order, services are brought acorrding to the given sequence
       at.include?('controller') and
-            components += %w(st2common st2reactor st2api st2auth)
+            components += %w(st2common st2api st2reactor st2auth)
       at.include?('worker') and
             components += %w(st2common st2actions)
       at.include?('client') and
