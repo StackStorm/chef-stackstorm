@@ -37,7 +37,7 @@ module StackstormCookbook
 
     def get_package_url(package_name)
       url = [ pkg_baseurl, pkg_version, pkg_type, pkg_build ]
-      url = url.map { |s| s.gsub(/\/+$/, '') }.join('/')      
+      url = url.map { |s| s.gsub(/\/+$/, '') }.join('/')
 
       "#{url}/#{get_package_basename(package_name)}"
     end
@@ -46,7 +46,7 @@ module StackstormCookbook
       sf = (pkg_type == 'debs' ? '_amd64.deb' : '.noarch.rpm')
       pf = (pkg_type == 'debs' ? '_' : '-')
 
-      "#{package_name}#{pf}#{pkg_version}-#{pkg_build}#{sf}"      
+      "#{package_name}#{pf}#{pkg_version}-#{pkg_build}#{sf}"
     end
 
     def package_provider

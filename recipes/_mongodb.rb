@@ -22,7 +22,7 @@ if %w(rhel fedora).include?(node['platform_family'])
 
     file("/lib/systemd/system/mongo#{letter}.service") do
       action :delete
-      notifies :run, 'execute[st2-systemctl-daemon-reload]'      
+      notifies :run, 'execute[st2-systemctl-daemon-reload]'
     end
   end
 

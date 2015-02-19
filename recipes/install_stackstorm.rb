@@ -26,9 +26,6 @@ stackstorm_fetch ':install stackstorm packages from St2 repository' do
   path cache_dir
   packages lazy { node['stackstorm']['components'] }
   action :install
-
-  notifies :create, 'file[:backup StackStorm dist configuration]', :immediately
-  notifies :create, 'template[:create StackStorm configuration]', :immediately
 end
 
 remote_file "#{node['stackstorm']['etc_dir']}/st2-requirements.txt" do

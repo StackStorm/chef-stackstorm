@@ -18,7 +18,7 @@ class Chef
       end
 
       action :install do
-        include_recipe('gdebi::default')
+        include_recipe('gdebi::default') if pkg_type == 'debs'
         fetch_binaries
 
         new_resource.packages.each do |pkg_name|

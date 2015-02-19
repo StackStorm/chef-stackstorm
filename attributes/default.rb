@@ -9,8 +9,8 @@ default['stackstorm']['conf_path'] = '/etc/st2/st2.conf'
 default['stackstorm']['log_dir'] = '/var/log/st2'
 default['stackstorm']['runas_user'] = 'st2'
 default['stackstorm']['runas_group'] = 'st2'
-default['stackstorm']['roles'] = %w(contoller worker client)
 default['stackstorm']['action_runners'] = node['cpu']['total']
+default['stackstorm']['roles'] = %w(contoller worker client)
 
 # Will be set by actual install provider
 default['stackstorm']['python_binary'] = nil
