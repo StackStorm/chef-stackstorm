@@ -13,8 +13,6 @@ default['stackstorm']['action_runners'] = node['cpu']['total']
 default['stackstorm']['st2_install']['base_url'] = 'https://ops.stackstorm.net/releases/st2'
 default['stackstorm']['st2_install']['packages'] = %w(st2common st2reactor st2actions st2api st2auth st2client)
 
-default['stackstorm']['enable_mistral_workflow'] = false
-
 # === StackStorm Configuration attributes responsible for generation.
 #
 

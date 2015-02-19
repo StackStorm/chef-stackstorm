@@ -2,14 +2,14 @@
 
 Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. This cookbook is used to install and bring up **St2** components using Chef.
 
+## Cookbook dependencies
+
+Depends on the following cookbooks: _sudo, build-essential, python, git, gdebi, rabbitmq, mongodb, yum-epel and openstack-mistral_.
 
 ## Supported Platforms
 
 Packaging for **St2** is currently done via *apt* or *rpm* packages, which can be found here https://ops.stackstorm.net/releases/st2.
-
-
-* **rhel family** >= 7.0
-* **ubuntu** >= 12.04
+Tested to work on *ubuntu 14.04* and *centos 7.0*.
 
 ## Attributes
 
@@ -27,7 +27,6 @@ Packaging for **St2** is currently done via *apt* or *rpm* packages, which can b
 | `['stackstorm']['runas_user']` | String | User used to run **St2** services (execept *action runners*). | `'st2'` |
 | `['stackstorm']['runas_group']` | String | Group used to run **St2** services (execept *action runners*). | `'st2'` |
 | `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. | `node['cpu']['total']` |
-| `['stackstorm']['enable_mistral_workflow']` | Boolean | Enables installation of *Mistral Workflow Service* componentts. | `true` |
 | `['stackstorm'][config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
 
 ### User management
@@ -50,6 +49,8 @@ Stanley's ssh key is automatically generated if no **ssh_key** is provided. This
 ## Usage
 
 Stackstorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.
+
+Usage of mistral is optional and provided by the mistral cookbook, details are [here](https://github.com/dennybaa/chef-openstack-mistral).
 
 ### stackstorm::controller and stackstorm::worker
 
