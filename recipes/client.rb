@@ -24,8 +24,7 @@ when :system_wide
   end
 
   python_pip "install St2 client requirements.txt system-wide" do
-    package_name "#{node['stackstorm']['etc_dir']}/st2client-requirements.txt"
-    options '-r'
+    package_name "-r #{node['stackstorm']['etc_dir']}/st2client-requirements.txt"
     action  :install
   end
 

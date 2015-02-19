@@ -23,19 +23,6 @@ when :system_wide
 
 end
 
-template "#{node['stackstorm'][:etc_dir]}/controller.conf" do
-  owner 'root' and group 'root'
-  mode 0644
-  source 'st2.conf.erb'
-  variables lazy {
-    {
-      config_name: 'controller',
-      config: node['stackstorm']['config']
-    }
-  }
-  action :create
-end
-
 # Create register content resource
 register_content :sensors
 
