@@ -61,7 +61,7 @@ To chose specific roles for a node define `['stackstorm']['roles']` attribute to
   "run_list": [ "recipe[stackstorm::default]" ],
   "attributes": {
     "stackstorm": {
-      "roles": ['worker','client'],
+      "roles": [ "worker", "client" ],
       "config": { "lots of": "configuration" }
     }
   }
