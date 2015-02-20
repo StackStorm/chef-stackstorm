@@ -18,8 +18,13 @@ module StackstormCookbook
 
     def pkg_build
       @pkg_build ||= begin
-        b = node['stackstorm']['build'].to_s
-        b == 'current' ? current_build : b
+        already_fixed = ::IO.read("#{new_resource.path}/build_number").strip rescue nil
+        if already_fixed
+          already_fixed
+        else
+          b = node['stackstorm']['build'].to_s
+          b == 'current' ? current_build : b
+        end
       end
     end
 

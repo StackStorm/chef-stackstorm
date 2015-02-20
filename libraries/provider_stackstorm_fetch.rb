@@ -27,7 +27,16 @@ class Chef
             source "#{new_resource.path}/#{filename}"
             provider package_provider
             action :install
+
+            notifies :create, 'file[:fixate StackStorm build version]'
           end
+        end
+
+        # fixate package build
+        file ":fixate StackStorm build version" do
+          path "#{new_resource.path}/build_number"
+          content(pkg_build + "\n")
+          action :nothing
         end
       end
 
@@ -64,7 +73,7 @@ class Chef
           remote_file "#{new_resource.recipe_name} :fetching package from #{url}" do
             path ::File.join(new_resource.path, ::File.basename(url))
             source url
-            action :create
+            action :create_if_missing
           end
         end
       end
