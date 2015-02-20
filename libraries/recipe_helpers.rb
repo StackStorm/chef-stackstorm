@@ -4,6 +4,7 @@ module StackstormCookbook
     def stackstorm_service(service_name, &block)
       init_path = service_init_path(service_name)
       service_provider = self.service_provider
+      update_actions = Array(node['stackstorm']['on_config_update'])
 
       template "#{recipe_name} :create init template for #{service_name}" do
         path init_path
@@ -20,6 +21,13 @@ module StackstormCookbook
         service_name service_name
         provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
         action [ :enable, :start ]
+
+        # Handle update actions for services
+        if (service_name !~ /^st2actionrunner-/)
+          update_actions.each { |action|
+            subscribes action, 'template[:create StackStorm configuration]'
+          }
+        end
       end
     end
 

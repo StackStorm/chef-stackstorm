@@ -28,8 +28,8 @@ end
 
 directory "st2:log_dir" do
   path node['stackstorm']['log_dir']
-  owner node['stackstorm']['runas_user']
-  group node['stackstorm']['runas_group']
+  owner node['stackstorm']['run_user']
+  group node['stackstorm']['run_group']
   mode '0755'
   action :create
 end

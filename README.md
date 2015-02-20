@@ -25,10 +25,10 @@ Tested to work on *ubuntu 14.04* and *centos 7.0*.
 | `['stackstorm']['etc_dir']` | String | Configuration directory of **St2**. | `'/etc/st2'` |
 | `['stackstorm']['conf_path']` | String | **St2** configuration file path. | `'/etc/st2/st2.conf'` |
 | `['stackstorm']['log_dir']` | String | Log directory path where **St2** services write log files. | `'/var/log/st2'` |
-| `['stackstorm']['runas_user']` | String | User used to run **St2** services (except *action runners*). | `'st2'` |
-| `['stackstorm']['runas_group']` | String | Group used to run **St2** services (except *action runners*). | `'st2'` |
+| `['stackstorm']['run_user']` | String | User used to run **St2** services (except *action runners*). | `'st2'` |
+| `['stackstorm']['run_group']` | String | Group used to run **St2** services (except *action runners*). | `'st2'` |
 | `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. | `node['cpu']['total']` |
-| `['stackstorm']['roles']` | Integer | List of roles to bring up on a node. | `['controller', 'worker', 'client']` |
+| `['stackstorm']['roles']` | Array | List of roles to bring up on a node. Set a combination of the following roles: *controller, worker and client*. | `[]` |
 | `['stackstorm'][config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
 
 ### User management
@@ -44,7 +44,7 @@ Tested to work on *ubuntu 14.04* and *centos 7.0*.
 | `['stackstorm']['user']['ssh_key_bits']` | Integer | Specifies the number of bits for ssh key creation. | `2048` |
 | `['stackstorm']['user']['enable_sudo']` | Boolean | Enables sudo privileges for stanley. | `true` |
 
-StackStorm uses **system_user** option to specify privileges used to execute local or remote actions. This user is managed and configured by this cookbook. **Stanley** user is different from **runas_user** whose privileges used for running **all St2** services (except *action runners*). Action runners are started with **root** privileges and StackStorm drops them to *stanley's* privileges during action execution. If **root** privileges for running actions are required *stanley* must be valid sudoer.
+StackStorm uses **system_user** option to specify privileges used to execute local or remote actions. This user is managed and configured by this cookbook. **Stanley** user is different from **run_user** whose privileges used for running **all St2** services (except *action runners*). Action runners are started with **root** privileges and StackStorm drops them to *stanley's* privileges during action execution. If **root** privileges for running actions are required *stanley* must be valid sudoer.
 
 Stanley's ssh key is automatically generated if no **ssh_key** is provided. This is the default behavior.
 
@@ -52,7 +52,7 @@ Stanley's ssh key is automatically generated if no **ssh_key** is provided. This
 
 StackStorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.
 
-Usage of mistral is optional and provided by the mistral cookbook, details are [here](https://github.com/dennybaa/chef-openstack-mistral).
+Usage of mistral is optional and provided by the mistral cookbook, details are [here](https://github.com/StackStorm/chef-openstack-mistral).
 
 To chose specific roles for a node define `['stackstorm']['roles']` attribute to contain one of the following roles: *controller, worker, client*, or their combination combination. For example with a json attribute file.
 
@@ -70,7 +70,7 @@ To chose specific roles for a node define `['stackstorm']['roles']` attribute to
 
 ## Invocation
 
-Define roles with the `stackstorm.roles` attribute, provide valid configuration options and include `"recipe[stackstorm::default]"` into your run list. Recipe downloads and installs StackStorm packages required for given roles, writes configuration files and filnally brings up StackStorm system services.
+Define roles with the `stackstorm.roles` attribute, provide valid configuration options and include `"recipe[stackstorm::default]"` into your run list. The default recipe downloads and installs StackStorm packages required for given roles, writes configuration files and filnally brings up StackStorm system services.
 
 **Mind that the valid configuration must be provided such as RabbitMQ and MongoDB endpoints**. Otherwise StackStorm services fail when trying to establish connections.
 

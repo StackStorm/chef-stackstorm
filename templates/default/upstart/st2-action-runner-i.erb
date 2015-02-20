@@ -6,8 +6,8 @@ author          "chef-client"
 start on starting st2actionrunner
 stop on stopping st2actionrunner
 
-setuid <%= @runas_user %>
-setgid <%= @runas_group %>
+setuid <%= @run_user %>
+setgid <%= @run_group %>
 respawn
 respawn limit 2 5
 

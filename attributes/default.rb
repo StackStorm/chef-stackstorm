@@ -7,16 +7,18 @@ default['stackstorm']['bin_dir'] = '/usr/bin'
 default['stackstorm']['etc_dir'] = '/etc/st2'
 default['stackstorm']['conf_path'] = '/etc/st2/st2.conf'
 default['stackstorm']['log_dir'] = '/var/log/st2'
-default['stackstorm']['runas_user'] = 'st2'
-default['stackstorm']['runas_group'] = 'st2'
+default['stackstorm']['run_user'] = 'st2'
+default['stackstorm']['run_group'] = 'st2'
 default['stackstorm']['action_runners'] = node['cpu']['total']
-default['stackstorm']['roles'] = %w(contoller worker client)
+# The roles attribute should be specifically defined.
+default['stackstorm']['roles'] = []
+default['stackstorm']['on_config_update'] = :restart
 
 # Will be set by actual install provider
 default['stackstorm']['python_binary'] = nil
 
 # Will be populated automaticaly when roles use, unless overrided.
-default['stackstorm']['components'] = []
+default['stackstorm']['components'] = %w(st2common)
 default['stackstorm']['service_binary'] = {
   st2history: 'history',
   st2actionrunner: 'actionrunner',

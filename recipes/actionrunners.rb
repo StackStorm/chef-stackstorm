@@ -33,8 +33,8 @@ workers.each do |num|
     variables lazy {
       Mash.new({
         service_name: service_name,
-        runas_user: 'root',
-        runas_group: 'root',
+        run_user: 'root',
+        run_group: 'root',
         service_bin: service_bin,
         etc_dir: node['stackstorm']['etc_dir'],
         log_dir: node['stackstorm']['log_dir'],

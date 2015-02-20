@@ -5,8 +5,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=<%= @runas_user %>
-Group=<%= @runas_group %>
+User=<%= @run_user %>
+Group=<%= @run_group %>
 ExecStart=<%= @python %> <%= @service_bin %> --config-file <%= @config_file %>
 TimeoutSec=60
 PrivateTmp=true

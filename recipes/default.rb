@@ -30,8 +30,8 @@ components.each do |component|
       variables lazy {
         Mash.new({
           service_name: service_name,
-          runas_user: node['stackstorm']['runas_user'],
-          runas_group: node['stackstorm']['runas_group'],
+          run_user: node['stackstorm']['run_user'],
+          run_group: node['stackstorm']['run_group'],
           service_bin: service_bin,
           etc_dir: node['stackstorm']['etc_dir'],
           log_dir: node['stackstorm']['log_dir'],
