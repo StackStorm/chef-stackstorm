@@ -39,6 +39,7 @@ else
   # Write supplied credentials
   file "creating #{conf.home}/.ssh/id_rsa key #{conf.user}" do
     path "#{conf.home}/.ssh/id_rsa"
+    mode 0640
     user conf.user
     group conf.group
     content(conf.ssh_key)
