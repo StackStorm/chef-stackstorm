@@ -21,3 +21,10 @@ user 'st2' do
   supports manage_home: true
   action :create
 end
+
+# Fix localhost in hosts, somehow missing on Fedora 20
+hostsfile_entry '127.0.0.1' do
+  hostname  'localhost'
+  comment   'Appended by st2 cookbook'
+  action    :append
+end

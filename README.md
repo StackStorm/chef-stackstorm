@@ -2,14 +2,14 @@
 
 Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. This cookbook is used to install and bring up **St2** components using Chef.
 
-## Cookbook dependencies
+## Cookbook version
 
-Depends on the following cookbooks: _sudo, build-essential, python, git, gdebi, rabbitmq, mongodb, yum-epel and openstack-mistral_.
+This version of cookbook is supposed for stackstorm version >= 0.8, for elder versions use cookbook version [0.2.1](https://github.com/StackStorm/chef-stackstorm/tree/v0.2.1).
+
 
 ## Supported Platforms
 
-Packaging for **St2** is currently done via *apt* or *rpm* packages which can be found here https://ops.stackstorm.net/releases/st2.
-Tested to work on *ubuntu 14.04* and *centos 7.0*.
+Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
 
 ## Attributes
 
@@ -17,9 +17,11 @@ Tested to work on *ubuntu 14.04* and *centos 7.0*.
 
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
-| `['stackstorm']['install_method']` | String | StackStorm installation method. | `'stackstorm'` |
-| `['stackstorm']['version']` | String | Version of stack **St2** to be installed.  | `'0.7'` |
-| `['stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
+| `['stackstorm']['install_method']` | String | StackStorm installation method. | `'repo'` |
+| `['stackstorm']['install_stackstorm']['version']` | String | Version of stack **St2** to be installed (when *stackstorm* install method is used).  | `'0.8.3'` |
+| `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
+| `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
+| `['stackstorm']['install_repo']['debug_package']` | Boolean | Set to `true` to install *st2debug* package. | `false` |
 | `['stackstorm']['home']` | String | Base directory where is **St2** is installed (same path as in the *os-packages*). | `'/opt/stackstorm'` |
 | `['stackstorm']['bin_dir']` | String | Directory where **St2** binaries are located. It can be overrided by the install recipe. | `'/usr/bin'` |
 | `['stackstorm']['etc_dir']` | String | Configuration directory of **St2**. | `'/etc/st2'` |

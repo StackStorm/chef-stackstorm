@@ -13,8 +13,8 @@ self.send :extend, StackstormCookbook::RecipeHelpers
 include_recipe "stackstorm::install_#{node['stackstorm']['install_method']}"
 include_recipe 'stackstorm::config'
 
+# Apply st2 components
 components = apply_components
-runners = !components.delete('st2actions').nil?
 
 # register sensors
 register_content(:sensors) if components.include?('st2actions')
@@ -23,6 +23,8 @@ components.each do |component|
   services = node['stackstorm']['component_provides'][component] || []
 
   services.each do |service_name|
+    # actionrunner service is handled in actionrunners recipe
+    next if service_name == 'st2actionrunner'
     service_bin = node['stackstorm']['service_binary'][service_name] || service_name
     service_bin = "#{node['stackstorm']['bin_dir']}/#{service_bin}"
 
@@ -44,6 +46,6 @@ components.each do |component|
   end
 end
 
-if runners
+if components.include?('st2actions')
   include_recipe 'stackstorm::actionrunners'
 end

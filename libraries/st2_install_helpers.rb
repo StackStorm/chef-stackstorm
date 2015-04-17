@@ -13,7 +13,7 @@ module StackstormCookbook
     end
 
     def pkg_version
-      node['stackstorm']['version']
+      node['stackstorm']['install_stackstorm']['version']
     end
 
     def pkg_build
@@ -22,7 +22,7 @@ module StackstormCookbook
         if already_fixed
           already_fixed
         else
-          b = node['stackstorm']['build'].to_s
+          b = node['stackstorm']['install_stackstorm']['build'].to_s
           b == 'current' ? current_build : b
         end
       end
