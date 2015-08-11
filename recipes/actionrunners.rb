@@ -20,7 +20,7 @@ service_provider = self.service_provider
 # register actions
 register_content(:actions)
 
-service_bin = node['stackstorm']['service_binary']['st2actionrunner']
+service_bin = 'st2actionrunner'
 service_bin = "#{node['stackstorm']['bin_dir']}/#{service_bin}"
 
 workers.each do |num|

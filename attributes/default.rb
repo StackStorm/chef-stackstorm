@@ -23,12 +23,7 @@ default['stackstorm']['python_binary'] = nil
 
 # Will be populated automaticaly when roles use, unless overrided.
 default['stackstorm']['components'] = %w(st2common)
-default['stackstorm']['service_binary'] = {
-  st2history: 'history',
-  st2actionrunner: 'actionrunner',
-  st2rulesengine: 'rules_engine',
-  st2sensorcontainer: 'sensor_container',
-}
+default['stackstorm']['service_binary'] = {}
 
 default['stackstorm']['component_provides'] = {
   st2actions: %W(st2actionrunner st2resultstracker),
@@ -37,7 +32,7 @@ default['stackstorm']['component_provides'] = {
 }
 
 default['stackstorm']['install_stackstorm']['build'] = 'current'
-default['stackstorm']['install_stackstorm']['version'] = '0.8.3'
+default['stackstorm']['install_stackstorm']['version'] = '0.12.1'
 default['stackstorm']['install_stackstorm']['base_url'] = 'https://downloads.stackstorm.net/releases/st2'
 default['stackstorm']['install_stackstorm']['packages'] = %w(st2common st2reactor st2actions st2api st2auth st2client)
 

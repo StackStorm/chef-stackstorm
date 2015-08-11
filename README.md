@@ -2,10 +2,9 @@
 
 Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. This cookbook is used to install and bring up **St2** components using Chef.
 
-## Cookbook version
+## Compatibility
 
-This version of cookbook is supposed for stackstorm version >= 0.8, for elder versions use cookbook version [0.2.1](https://github.com/StackStorm/chef-stackstorm/tree/v0.2.1).
-
+Cookbook works with recent chef versions, but **<12.4.0** due to a bug in platform detection code. (Method `Chef::Platform.find_provider` doesn't work properly in chef ~>12.4.0).
 
 ## Supported Platforms
 
@@ -18,7 +17,7 @@ Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
 | `['stackstorm']['install_method']` | String | StackStorm installation method. | `'repo'` |
-| `['stackstorm']['install_stackstorm']['version']` | String | Version of stack **St2** to be installed (when *stackstorm* install method is used).  | `'0.8.3'` |
+| `['stackstorm']['install_stackstorm']['version']` | String | Version of stack **St2** to be installed (when *stackstorm* install method is used).  | `'0.12.1'` |
 | `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
 | `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
 | `['stackstorm']['install_repo']['debug_package']` | Boolean | Set to `true` to install *st2debug* package. | `false` |

@@ -72,7 +72,7 @@ module StackstormCookbook
 
       if !content.empty?
         execute "#{recipe_name} register st2 content with: #{content}" do
-          command("python #{python_pack}/st2common/bin/registercontent.py " <<
+          command("python #{python_pack}/st2common/bin/st2-register-content " <<
                                       "#{content} --config-file #{conf_path}")
         end
       end
