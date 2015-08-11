@@ -49,6 +49,10 @@ StackStorm uses **system_user** option to specify privileges used to execute loc
 
 Stanley's ssh key is automatically generated if no **ssh_key** is provided. This is the default behavior.
 
+### stackstorm.config attributes
+
+There are different attributes providing options values which are substituted into **st2.conf** file. For more details have look at the [config.rb](attributes/config.rb).
+
 ## Usage
 
 StackStorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.

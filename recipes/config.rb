@@ -22,7 +22,7 @@ template ":create StackStorm configuration" do
   owner 'root' and group 'root'
   mode 0644
   source 'st2.conf.erb'
-  variables lazy { {config: node['stackstorm']['config']} }
+  variables lazy { node['stackstorm']['config'] }
   action :create
 end
 
