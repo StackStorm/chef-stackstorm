@@ -4,7 +4,7 @@ maintainer_email 'info@stackstorm.com'
 license          'Apache 2.0'
 description      'Installs/Configures stackstorm'
 long_description 'Installs/Configures stackstorm'
-version          '0.2.4'
+version          '0.2.5'
 
 supports 'debian'
 supports 'ubuntu'

@@ -4,7 +4,7 @@ Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. Th
 
 ## Compatibility
 
-Cookbook works with recent chef versions, but **<12.4.0** due to a bug in platform detection code. (Method `Chef::Platform.find_provider` doesn't work properly in chef ~>12.4.0).
+Use version **<0.2.5** of this cookbook with chef **<12.4.0**.
 
 ## Supported Platforms
 
