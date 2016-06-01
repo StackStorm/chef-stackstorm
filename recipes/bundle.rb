@@ -28,6 +28,7 @@ if platform_family?('fedora')
 end
 
 include_recipe 'stackstorm::_initial'
+include_recipe 'stackstorm::_packages'
 include_recipe 'stackstorm::_mongodb'
 include_recipe 'rabbitmq::default'
 include_recipe 'stackstorm::default'

@@ -6,6 +6,8 @@ Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. Th
 
 Use version **<0.2.5** of this cookbook with chef **<12.4.0**.
 
+Starting with version **0.3.0*, Packagecloud repo will be used to install Stackstorm packages instead of building from source.
+
 ## Supported Platforms
 
 Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
@@ -16,7 +18,6 @@ Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
 
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
-| `['stackstorm']['install_method']` | String | StackStorm installation method. | `'repo'` |
 | `['stackstorm']['install_stackstorm']['version']` | String | Version of stack **St2** to be installed (when *stackstorm* install method is used).  | `'0.12.1'` |
 | `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
 | `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
@@ -88,3 +89,7 @@ For those who wants to play with StackStorm there's an *all-in-one* solution whi
 
 * Author:: StackStorm (st2-dev) (<info@stackstorm.com>)
 * Author:: Denis Baryshev (<dennybaa@gmail.com>)
+
+## Contributors
+
+* Bao Nguyen (<ngqbao@gmail.com>)

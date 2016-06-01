@@ -67,25 +67,12 @@ module StackstormCookbook
 
     def register_content(opt_list)
       content = Array(opt_list).map {|s| "--register-#{s}"}.join(' ')
-      python_pack = self.python_pack
       conf_path = node['stackstorm']['conf_path']
 
       if !content.empty?
         execute "#{recipe_name} register st2 content with: #{content}" do
-          command("python #{python_pack}/st2common/bin/st2-register-content " <<
-                                      "#{content} --config-file #{conf_path}")
+          command("st2-register-content " << "#{content} --config-file #{conf_path}")
         end
-      end
-    end
-
-    def python_pack
-      # get python version, ex. 2.7 for 2.7.6
-      pv = node['languages']['python']['version'].to_f
-      case node.platform_family
-      when 'debian'
-        "/usr/lib/python#{pv}/dist-packages"
-      when 'rhel', 'fedora'
-        "/usr/lib/python#{pv}/site-packages"
       end
     end
 

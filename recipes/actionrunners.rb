@@ -11,7 +11,7 @@
 self.send :extend, StackstormCookbook::RecipeHelpers
 return unless apply_components.include?('st2actions')
 
-include_recipe "stackstorm::install_#{node['stackstorm']['install_method']}"
+include_recipe "stackstorm::_packages"
 include_recipe 'stackstorm::config'
 
 workers = Array(1..node['stackstorm']['action_runners'].to_i) << nil

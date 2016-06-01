@@ -1,10 +1,3 @@
-default['stackstorm']['install_method'] = value_for_platform({
-  "ubuntu" => { "14.04" => "repo", "default" => "repo" },
-  "redhat" => { "6" => "repo", "default" => "repo" },
-  "fedora" => { "20" => "repo", "default" => "repo" },
-  "default" => "repo"
-})
-
 default['stackstorm']['api_url'] = "http://127.0.0.1:9101"
 default['stackstorm']['home'] = '/opt/stackstorm'
 default['stackstorm']['bin_dir'] = '/usr/bin'
@@ -24,6 +17,7 @@ default['stackstorm']['python_binary'] = nil
 # Will be populated automaticaly when roles use, unless overrided.
 default['stackstorm']['components'] = %w(st2common)
 default['stackstorm']['service_binary'] = {}
+default['stackstorm']['install_stackstorm']['version'] = '1.4.0-8'
 
 default['stackstorm']['component_provides'] = {
   st2actions: %W(st2actionrunner st2resultstracker st2notifier),
@@ -31,18 +25,10 @@ default['stackstorm']['component_provides'] = {
   st2reactor: %w(st2rulesengine st2sensorcontainer)
 }
 
-# DEPRECIATED, use install_repo instead.
-default['stackstorm']['install_stackstorm']['build'] = 'current'
-default['stackstorm']['install_stackstorm']['version'] = '0.12.1'
-default['stackstorm']['install_stackstorm']['base_url'] = 'https://downloads.stackstorm.net/releases/st2'
-default['stackstorm']['install_stackstorm']['packages'] = %w(st2 st2mistral)
-
+# It's recommended to use the install_repo
 default['stackstorm']['install_repo']['suite'] = 'stable'
 default['stackstorm']['install_repo']['debug_package'] = false
+#default['stackstorm']['install_repo']['packages'] = %w(st2actions st2api st2auth st2common st2reactor python-st2client)
 default['stackstorm']['install_repo']['packages'] = %w(st2 st2mistral)
-default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/deb"
 
-case node['platform_family']
-when 'fedora', 'rhel'
-  default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/rpm/#{node[:platform]}/#{node[:platform_version]}/#{node['stackstorm']['install_repo']['suite']}"
-end
+default['openstack-mistral']['home'] = '/opt/stackstorm/mistral'

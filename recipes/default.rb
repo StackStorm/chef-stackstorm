@@ -4,16 +4,10 @@
 #
 # Copyright (C) 2015 StackStorm (info@stackstorm.com)
 #
-
-# Recipe brings up StackStorm system services.
-#
-
-self.send :extend, StackstormCookbook::RecipeHelpers
-
-include_recipe "stackstorm::install_#{node['stackstorm']['install_method']}"
 include_recipe 'stackstorm::config'
 
 # Apply st2 components
+self.send :extend, StackstormCookbook::RecipeHelpers
 components = apply_components
 
 # register sensors

@@ -1,3 +1,5 @@
+include_recipe 'apt'
+
 [
   node['stackstorm']['home'],
   node['stackstorm']['etc_dir']

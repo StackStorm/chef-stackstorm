@@ -4,6 +4,7 @@
 #
 # Copyright (C) 2015 StackStorm (info@stackstorm.com)
 #
+include_recipe 'openstack-mistral'
 
 mysql_service 'default' do
   port '3306'
@@ -16,8 +17,6 @@ mysql_client 'default' do
 end
 
 node.override['openstack-mistral']['etc_dir'] = '/etc/mistral'
-node.override['openstack-mistral']['source']['git_url'] = 'https://github.com/StackStorm/mistral.git'
-node.override['openstack-mistral']['source']['git_revision'] = 'st2-0.9.0'
 node.override['openstack-mistral']['db_initialize']['enabled'] = true
 node.override['openstack-mistral']['db_initialize']['password'] = 'ilikerandompasswords'
 
