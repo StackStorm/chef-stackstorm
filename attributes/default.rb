@@ -47,5 +47,5 @@ when 'debian'
 when 'fedora', 'rhel'
   default['stackstorm']['install_repo']['packages'] = %w(st2actions st2api
     st2auth st2common st2reactor st2client)
-  default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/rpm/#{node[:platform]}/#{node[:platform_version]}/#{node['stackstorm']['install_repo']['suite']}"
+  default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/rpm/#{node['platform']}/#{node['platform_version']}/#{node['stackstorm']['install_repo']['suite']}"
 end

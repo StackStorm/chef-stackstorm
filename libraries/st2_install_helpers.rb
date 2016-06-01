@@ -35,7 +35,7 @@ module StackstormCookbook
           when 'fedora', 'rhel'
             'rpms'
           else
-            Chef::Log.error("Unsupported platform #{node[:platform]}!")
+            Chef::Log.error("Unsupported platform #{node['platform']}!")
             raise RuntimeError.new
       end
     end

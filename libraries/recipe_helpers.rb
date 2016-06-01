@@ -39,11 +39,11 @@ module StackstormCookbook
         avail = cookbook_supports.select { |sv| platform_supports.include? sv }
 
         if avail.empty?
-            NotImplementedError.new("platform #{node[:platform]} " \
-                                    "#{node[:platform_version]} not supported")
+            NotImplementedError.new("platform #{node['platform']} " \
+                                    "#{node['platform_version']} not supported")
         end
 
-        case node.platform_family
+        case node['platform_family']
         when 'debian'
           avail.include?(:upstart) ? :upstart : :debian
         when 'rhel', 'fedora'
@@ -70,18 +70,17 @@ module StackstormCookbook
       python_pack = self.python_pack
       conf_path = node['stackstorm']['conf_path']
 
-      if !content.empty?
-        execute "#{recipe_name} register st2 content with: #{content}" do
-          command("python #{python_pack}/st2common/bin/st2-register-content " <<
-                                      "#{content} --config-file #{conf_path}")
-        end
+      execute "#{recipe_name} register st2 content with: #{content}" do
+        command("python #{python_pack}/st2common/bin/st2-register-content " <<
+                                    "#{content} --config-file #{conf_path}")
+        not_if { content.empty? }
       end
     end
 
     def python_pack
       # get python version, ex. 2.7 for 2.7.6
       pv = node['languages']['python']['version'].to_f
-      case node.platform_family
+      case node['platform_family']
       when 'debian'
         "/usr/lib/python#{pv}/dist-packages"
       when 'rhel', 'fedora'
