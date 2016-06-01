@@ -8,7 +8,7 @@
 # Recipe brings up StackStorm action runner system services.
 #
 
-self.send :extend, StackstormCookbook::RecipeHelpers
+send :extend, StackstormCookbook::RecipeHelpers
 return unless apply_components.include?('st2actions')
 
 include_recipe "stackstorm::install_#{node['stackstorm']['install_method']}"
@@ -24,14 +24,13 @@ service_bin = 'st2actionrunner'
 service_bin = "#{node['stackstorm']['bin_dir']}/#{service_bin}"
 
 workers.each do |num|
-  service_name = num ? "st2actionrunner-#{num}" : "st2actionrunner"
-  template_source = num ? "#{service_provider}/st2-action-runner-i.erb" :
-      "#{service_provider}/st2-action-runner.erb"
+  service_name = num ? "st2actionrunner-#{num}" : 'st2actionrunner'
+  template_source = num ? "#{service_provider}/st2-action-runner-i.erb" : "#{service_provider}/st2-action-runner.erb"
 
   stackstorm_service service_name do
     source template_source
     variables lazy {
-      Mash.new({
+      Mash.new(
         service_name: service_name,
         run_user: 'root',
         run_group: 'root',
@@ -40,7 +39,7 @@ workers.each do |num|
         log_dir: node['stackstorm']['log_dir'],
         config_file: node['stackstorm']['conf_path'],
         python: node['stackstorm']['python_binary']
-      })
+      )
     }
   end
 end

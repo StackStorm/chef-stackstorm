@@ -8,7 +8,7 @@
 # Recipe brings up StackStorm system services.
 #
 
-self.send :extend, StackstormCookbook::RecipeHelpers
+send :extend, StackstormCookbook::RecipeHelpers
 
 include_recipe "stackstorm::install_#{node['stackstorm']['install_method']}"
 include_recipe 'stackstorm::config'
@@ -30,7 +30,7 @@ components.each do |component|
 
     stackstorm_service service_name do
       variables lazy {
-        Mash.new({
+        Mash.new(
           service_name: service_name,
           run_user: node['stackstorm']['run_user'],
           run_group: node['stackstorm']['run_group'],
@@ -39,13 +39,10 @@ components.each do |component|
           log_dir: node['stackstorm']['log_dir'],
           config_file: node['stackstorm']['conf_path'],
           python: node['stackstorm']['python_binary']
-        })
+        )
       }
     end
-
   end
 end
 
-if components.include?('st2actions')
-  include_recipe 'stackstorm::actionrunners'
-end
+include_recipe 'stackstorm::actionrunners' if components.include?('st2actions')

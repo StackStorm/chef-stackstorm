@@ -1,6 +1,5 @@
 module StackstormCookbook
   module RecipeHelpers
-
     def stackstorm_service(service_name, &block)
       init_path = service_init_path(service_name)
       service_provider = self.service_provider
@@ -20,13 +19,13 @@ module StackstormCookbook
       service "#{recipe_name} enable and start StackStorm service #{service_name}" do
         service_name service_name
         provider Chef::Provider::Service.const_get(service_provider.to_s.capitalize)
-        action [ :enable, :start ]
+        action [:enable, :start]
 
         # Handle update actions for services
-        if (service_name !~ /^st2actionrunner-/)
-          update_actions.each { |action|
+        if service_name !~ /^st2actionrunner-/
+          update_actions.each do |action|
             subscribes action, 'template[:create StackStorm configuration]'
-          }
+          end
         end
       end
     end
@@ -39,8 +38,8 @@ module StackstormCookbook
         avail = cookbook_supports.select { |sv| platform_supports.include? sv }
 
         if avail.empty?
-            NotImplementedError.new("platform #{node['platform']} " \
-                                    "#{node['platform_version']} not supported")
+          NotImplementedError.new("platform #{node['platform']} " \
+                                  "#{node['platform_version']} not supported")
         end
 
         case node['platform_family']
@@ -66,12 +65,12 @@ module StackstormCookbook
     end
 
     def register_content(opt_list)
-      content = Array(opt_list).map {|s| "--register-#{s}"}.join(' ')
+      content = Array(opt_list).map { |s| "--register-#{s}" }.join(' ')
       python_pack = self.python_pack
       conf_path = node['stackstorm']['conf_path']
 
       execute "#{recipe_name} register st2 content with: #{content}" do
-        command("python #{python_pack}/st2common/bin/st2-register-content " <<
+        command("python #{python_pack}/st2common/bin/st2-register-content " \
                                     "#{content} --config-file #{conf_path}")
         not_if { content.empty? }
       end
@@ -94,12 +93,9 @@ module StackstormCookbook
       components = (%w(st2common) + node['stackstorm']['components']).uniq
 
       # mind order, services are brought acorrding to the given sequence
-      at.include?('controller') and
-            components += %w(st2common st2api st2reactor st2auth)
-      at.include?('worker') and
-            components += %w(st2common st2actions)
-      at.include?('client') and
-            components += %w(st2common st2client)
+      components += %w(st2common st2api st2reactor st2auth) if at.include?('controller')
+      components += %w(st2common st2actions) if at.include?('worker')
+      components += %w(st2common st2client) if at.include?('client')
 
       node.default['stackstorm']['components'] = components.uniq
     end
@@ -109,6 +105,5 @@ module StackstormCookbook
     def _service_providers
       Chef::Platform::ServiceHelpers.service_resource_providers
     end
-
   end
 end

@@ -16,7 +16,7 @@ if %w(rhel fedora).include?(node['platform_family'])
     service "st2 remove systemd mongo#{letter} service" do
       service_name "mongo#{letter}"
       provider Chef::Provider::Service::Systemd
-      action [ :stop, :disable ]
+      action [:stop, :disable]
       only_if { ::File.exist?("/lib/systemd/system/mongo#{letter}.service") }
     end
 

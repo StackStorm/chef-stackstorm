@@ -3,9 +3,9 @@ module StackstormCookbook
     require 'net/http'
 
     def current_build
-      url = [ pkg_baseurl, pkg_version, pkg_type ]
+      url = [pkg_baseurl, pkg_version, pkg_type]
       url << 'current/VERSION.txt'
-      Net::HTTP.get(URI( url.map {|s| s.gsub(/\/+$/,'')}.join('/') )).strip
+      Net::HTTP.get(URI(url.map { |s| s.gsub(/\/+$/, '') }.join('/'))).strip
     end
 
     def pkg_baseurl
@@ -30,18 +30,19 @@ module StackstormCookbook
 
     def pkg_type
       @pkg_type ||= case node['platform_family']
-          when 'debian'
-            'debs'
-          when 'fedora', 'rhel'
-            'rpms'
-          else
-            Chef::Log.error("Unsupported platform #{node['platform']}!")
-            raise RuntimeError.new
-      end
+                    when 'debian'
+                      'debs'
+                    when 'fedora', 'rhel'
+                      'rpms'
+                    else
+                      msg = "Unsupported platform #{node['platform']}!"
+                      Chef::Log.error(msg)
+                      raise msg
+                    end
     end
 
     def get_package_url(package_name)
-      url = [ pkg_baseurl, pkg_version, pkg_type, pkg_build ]
+      url = [pkg_baseurl, pkg_version, pkg_type, pkg_build]
       url = url.map { |s| s.gsub(/\/+$/, '') }.join('/')
 
       "#{url}/#{get_package_basename(package_name)}"
@@ -72,6 +73,5 @@ module StackstormCookbook
         ::File.join(cache_dir, ::File.basename(url))
       end
     end
-
   end
 end
