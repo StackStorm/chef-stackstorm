@@ -1,8 +1,8 @@
 default['stackstorm']['install_method'] = value_for_platform({
-  "ubuntu" => { "14.04" => "repo", "default" => "stackstorm" },
-  "redhat" => { "6" => "repo", "default" => "stackstorm" },
-  "fedora" => { "20" => "repo", "default" => "stackstorm" },
-  "default" => "stackstorm"
+  "ubuntu" => { "14.04" => "repo", "default" => "repo" },
+  "redhat" => { "6" => "repo", "default" => "repo" },
+  "fedora" => { "20" => "repo", "default" => "repo" },
+  "default" => "repo"
 })
 
 default['stackstorm']['api_url'] = "http://127.0.0.1:9101"
@@ -31,21 +31,18 @@ default['stackstorm']['component_provides'] = {
   st2reactor: %w(st2rulesengine st2sensorcontainer)
 }
 
+# DEPRECIATED, use install_repo instead.
 default['stackstorm']['install_stackstorm']['build'] = 'current'
 default['stackstorm']['install_stackstorm']['version'] = '0.12.1'
 default['stackstorm']['install_stackstorm']['base_url'] = 'https://downloads.stackstorm.net/releases/st2'
-default['stackstorm']['install_stackstorm']['packages'] = %w(st2common st2reactor st2actions st2api st2auth st2client)
+default['stackstorm']['install_stackstorm']['packages'] = %w(st2 st2mistral)
 
 default['stackstorm']['install_repo']['suite'] = 'stable'
 default['stackstorm']['install_repo']['debug_package'] = false
+default['stackstorm']['install_repo']['packages'] = %w(st2 st2mistral)
+default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/deb"
 
 case node['platform_family']
-when 'debian'
-  default['stackstorm']['install_repo']['packages'] = %w(st2actions st2api
-    st2auth st2common st2reactor python-st2client)
-  default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/deb"
 when 'fedora', 'rhel'
-  default['stackstorm']['install_repo']['packages'] = %w(st2actions st2api
-    st2auth st2common st2reactor st2client)
   default['stackstorm']['install_repo']['base_url'] = "https://downloads.stackstorm.net/rpm/#{node[:platform]}/#{node[:platform_version]}/#{node['stackstorm']['install_repo']['suite']}"
 end

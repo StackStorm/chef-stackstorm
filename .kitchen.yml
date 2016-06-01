@@ -6,12 +6,12 @@ driver:
     cpus: 2
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
   - name: ubuntu-14.04
-  - name: fedora-20
-  - name: centos-7.0
+  # - name: fedora-20
+  # - name: centos-7.0
 
 suites:
   - name: default

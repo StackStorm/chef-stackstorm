@@ -31,26 +31,3 @@ mistral 'default' do
     }
   )
 end
-
-# st2mistral plugin installation
-mistral_rev = node['openstack-mistral']['source']['git_revision']
-
-git 'fetch https://github.com/StackStorm/st2mistral.git' do
-  destination '/etc/mistral/actions'
-  repository 'https://github.com/StackStorm/st2mistral.git'
-  revision mistral_rev
-  action(node['openstack-mistral']['source']['git_action'] || :checkout)
-  notifies :run, 'execute[:run st2mistral plugin setup]'
-end
-
-python_pip ':install python-mistralclient' do
-  package_name "git+https://github.com/StackStorm/python-mistralclient.git@#{mistral_rev}"
-  virtualenv " #{node['openstack-mistral']['source']['home']}/.venv"
-  action :install
-end
-
-execute ':run st2mistral plugin setup' do
-  cwd '/etc/mistral/actions'
-  command "sh -c '. #{node['openstack-mistral']['source']['home']}/.venv/bin/activate; python setup.py develop'"
-  action :nothing
-end

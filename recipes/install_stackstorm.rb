@@ -7,6 +7,10 @@
 
 # Fetches remote packages from StackStorm repository.
 
+# DEPRECIATED [1], install using package repo instead
+# [1] https://stackstorm.com/2016/05/03/road-to-packages/
+
+
 include_recipe 'stackstorm::_initial'
 
 node.override['stackstorm']['bin_dir'] = '/usr/bin'
