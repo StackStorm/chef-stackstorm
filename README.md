@@ -1,5 +1,7 @@
 # StackStorm chef cookbook
 
+[![Build Status](https://travis-ci.org/StackStorm/chef-stackstorm.svg)](https://travis-ci.org/StackStorm/chef-stackstorm)
+
 Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. This cookbook is used to install and bring up **St2** components using Chef.
 
 ## Compatibility
