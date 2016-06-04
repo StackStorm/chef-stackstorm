@@ -33,7 +33,7 @@ class Chef
         end
 
         # fixate package build
-        file ":fixate StackStorm build version" do
+        file ':fixate StackStorm build version' do
           path "#{new_resource.path}/build_number"
           content(pkg_build + "\n")
           action :nothing
@@ -44,8 +44,10 @@ class Chef
         packages = Array.new(new_resource.packages)
 
         # handle different name for debian package
-        pkg_type == 'debs' and packages.delete('st2client') and
-            packages.push('python-st2client')
+        if pkg_type == 'debs'
+          packages.delete('st2client')
+          packages.push('python-st2client')
+        end
 
         packages.each do |pkg_name|
           package "#{new_resource.recipe_name} :remove package #{pkg_name}" do
@@ -56,11 +58,11 @@ class Chef
       end
 
       def package_list
-        @package_list ||= Array(new_resource.packages).map {|s| s.to_s}
+        @package_list ||= Array(new_resource.packages).map(&:to_s)
       end
 
       def fetch_binaries
-        directory "#{new_resource.recipe_name} :create package cache directory #{new_resource.path}"  do
+        directory "#{new_resource.recipe_name} :create package cache directory #{new_resource.path}" do
           path new_resource.path
           owner 'root'
           group 'root'
@@ -77,7 +79,6 @@ class Chef
           end
         end
       end
-
     end
   end
 end

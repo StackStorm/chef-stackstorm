@@ -15,7 +15,7 @@ node.override['stackstorm']['python_binary'] = node['python']['binary']
 # Add StackStorm repository
 case node['platform_family']
 when 'debian'
-  apt_repository "downloads.stackstorm.net" do
+  apt_repository 'downloads.stackstorm.net' do
     uri node['stackstorm']['install_repo']['base_url']
     distribution "#{node['lsb']['codename']}_#{node['stackstorm']['install_repo']['suite']}"
     key "#{node['stackstorm']['install_repo']['base_url']}/pubkey.gpg"
@@ -23,7 +23,7 @@ when 'debian'
   end
 when 'fedora', 'rhel'
   yum_repository 'downloads.stackstorm.net' do
-    description "StackStorm offical package repository"
+    description 'StackStorm offical package repository'
     baseurl node['stackstorm']['install_repo']['base_url']
     gpgcheck false
     # gpgkey "#{node['stackstorm']['install_repo']['base_url']}/pubkey.gpg"
@@ -32,7 +32,7 @@ when 'fedora', 'rhel'
 end
 
 # Install packages
-node['stackstorm']['install_repo']['packages'].each {|p| package p}
+node['stackstorm']['install_repo']['packages'].each { |p| package p }
 
 package 'st2debug' do
   only_if { node['stackstorm']['install_repo']['debug_package'] == true }
@@ -43,9 +43,9 @@ remote_file "#{node['stackstorm']['etc_dir']}/st2-requirements.txt" do
   mode '0644'
 end
 
-python_pip "install St2 requirements.txt system-wide" do
+python_pip 'install St2 requirements.txt system-wide' do
   package_name "-r #{node['stackstorm']['etc_dir']}/st2-requirements.txt"
-  action  :install
+  action :install
 end
 
 remote_file "#{node['stackstorm']['etc_dir']}/st2client-requirements.txt" do
@@ -54,8 +54,8 @@ remote_file "#{node['stackstorm']['etc_dir']}/st2client-requirements.txt" do
   only_if { node['stackstorm']['components'].include?('st2client') }
 end
 
-python_pip "install St2 client requirements.txt system-wide" do
+python_pip 'install St2 client requirements.txt system-wide' do
   package_name "-r #{node['stackstorm']['etc_dir']}/st2client-requirements.txt"
-  action  :install
+  action :install
   only_if { node['stackstorm']['components'].include?('st2client') }
 end

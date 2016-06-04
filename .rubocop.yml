@@ -1,0 +1,48 @@
+AllCops:
+  DisplayCopNames: true
+
+Metrics/AbcSize:
+  Description: >-
+                 A calculated magnitude based on number of assignments,
+                 branches, and conditions.
+  Reference: 'http://c2.com/cgi/wiki?AbcMetric'
+  Enabled: true
+  Max: 30
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 30 lines of code.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
+  Enabled: true
+  Max: 30
+
+Style/NumericLiterals:
+  Description: >-
+                 Add underscores to large numeric literals to improve their
+                 readability.
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscores-in-numerics'
+  Enabled: true
+  MinDigits: 6
+
+Metrics/LineLength:
+  Description: 'Limit lines to 200 characters.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+  Enabled: true
+  Max: 200
+  Exclude:
+    - recipes/bundle.rb
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Style/RegexpLiteral:
+  Description: 'Use / or %r around regular expressions.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-r'
+  Enabled: false
+
+Style/RescueModifier:
+  Description: 'Avoid using rescue in its modifier form.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-rescue-modifiers'
+  Enabled: true
+  Exclude:
+    - libraries/st2_install_helpers.rb

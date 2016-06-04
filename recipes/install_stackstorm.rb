@@ -14,7 +14,7 @@ node.override['stackstorm']['python_binary'] = node['python']['binary']
 
 cache_dir = "#{node['stackstorm']['home']}/package_cache"
 
-directory ":create package cache directory #{cache_dir}"  do
+directory ":create package cache directory #{cache_dir}" do
   path cache_dir
   owner 'root'
   group 'root'
@@ -33,9 +33,9 @@ remote_file "#{node['stackstorm']['etc_dir']}/st2-requirements.txt" do
   mode '0644'
 end
 
-python_pip "install St2 requirements.txt system-wide" do
+python_pip 'install St2 requirements.txt system-wide' do
   package_name "-r #{node['stackstorm']['etc_dir']}/st2-requirements.txt"
-  action  :install
+  action :install
 end
 
 remote_file "#{node['stackstorm']['etc_dir']}/st2client-requirements.txt" do
@@ -44,8 +44,8 @@ remote_file "#{node['stackstorm']['etc_dir']}/st2client-requirements.txt" do
   only_if { node['stackstorm']['components'].include?('st2client') }
 end
 
-python_pip "install St2 client requirements.txt system-wide" do
+python_pip 'install St2 client requirements.txt system-wide' do
   package_name "-r #{node['stackstorm']['etc_dir']}/st2client-requirements.txt"
-  action  :install
+  action :install
   only_if { node['stackstorm']['components'].include?('st2client') }
 end

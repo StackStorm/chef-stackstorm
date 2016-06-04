@@ -8,5 +8,5 @@ if platform_family?('rhel', 'fedora')
   end
 end
 
-include_recipe "python::pip"
-include_recipe "python::virtualenv"
+include_recipe 'python::pip'
+include_recipe 'python::virtualenv'
