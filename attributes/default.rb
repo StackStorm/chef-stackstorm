@@ -6,7 +6,10 @@ default['stackstorm']['conf_path'] = '/etc/st2/st2.conf'
 default['stackstorm']['log_dir'] = '/var/log/st2'
 default['stackstorm']['run_user'] = 'st2'
 default['stackstorm']['run_group'] = 'st2'
-default['stackstorm']['action_runners'] = node['cpu']['total']
+
+# TODO: support customizable workers, default to 10 via package
+default['stackstorm']['action_runners'] = 10
+
 # The roles attribute should be specifically defined.
 default['stackstorm']['roles'] = []
 default['stackstorm']['on_config_update'] = :restart
@@ -17,7 +20,6 @@ default['stackstorm']['python_binary'] = nil
 # Will be populated automaticaly when roles use, unless overrided.
 default['stackstorm']['components'] = %w(st2common)
 default['stackstorm']['service_binary'] = {}
-default['stackstorm']['install_stackstorm']['version'] = '1.4.0-8'
 
 default['stackstorm']['component_provides'] = {
   st2actions: %W(st2actionrunner st2resultstracker st2notifier),
@@ -28,7 +30,6 @@ default['stackstorm']['component_provides'] = {
 # It's recommended to use the install_repo
 default['stackstorm']['install_repo']['suite'] = 'stable'
 default['stackstorm']['install_repo']['debug_package'] = false
-#default['stackstorm']['install_repo']['packages'] = %w(st2actions st2api st2auth st2common st2reactor python-st2client)
 default['stackstorm']['install_repo']['packages'] = %w(st2 st2mistral)
 
 default['openstack-mistral']['home'] = '/opt/stackstorm/mistral'

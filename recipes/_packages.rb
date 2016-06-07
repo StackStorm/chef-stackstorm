@@ -25,10 +25,29 @@ packagecloud_repo "StackStorm/stable" do
 end
 
 # Install packages
-node['stackstorm']['install_repo']['packages'].each {|p|
-  package(p) {version node['stackstorm']['install_stackstorm']['version']}
-  }
+node['stackstorm']['install_repo']['packages'].each {|p| package p}
 
 package 'st2debug' do
   only_if { node['stackstorm']['install_repo']['debug_package'] == true }
+end
+
+# Apply st2 components
+self.send :extend, StackstormCookbook::RecipeHelpers
+components = apply_components
+
+components.each do |component|
+  services = node['stackstorm']['component_provides'][component] || []
+
+  services.each do |service_name|
+    # actionrunner service is handled in actionrunners recipe
+    next if service_name == 'st2actionrunner'
+    service "#{recipe_name} enable and start StackStorm service #{service_name}" do
+      service_name service_name
+      action [ :enable, :start ]
+    end
+  end
+end
+
+if components.include?('st2actions')
+  include_recipe 'stackstorm::actionrunners'
 end

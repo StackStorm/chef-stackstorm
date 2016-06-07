@@ -14,11 +14,12 @@ Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
 
 ## Attributes
 
+__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed. Overwrite this behavior using custom wrapper cookbook.
+
 ### Common attributes
 
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
-| `['stackstorm']['install_stackstorm']['version']` | String | Version of stack **St2** to be installed (when *stackstorm* install method is used).  | `'0.12.1'` |
 | `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
 | `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
 | `['stackstorm']['install_repo']['debug_package']` | Boolean | Set to `true` to install *st2debug* package. | `false` |
@@ -29,7 +30,7 @@ Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
 | `['stackstorm']['log_dir']` | String | Log directory path where **St2** services write log files. | `'/var/log/st2'` |
 | `['stackstorm']['run_user']` | String | User used to run **St2** services (except *action runners*). | `'st2'` |
 | `['stackstorm']['run_group']` | String | Group used to run **St2** services (except *action runners*). | `'st2'` |
-| `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. | `node['cpu']['total']` |
+| `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. (TODO) | 10 |
 | `['stackstorm']['roles']` | Array | List of roles to bring up on a node. Set a combination of the following roles: *controller, worker and client*. | `[]` |
 | `['stackstorm'][config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
 
