@@ -22,7 +22,7 @@ default['stackstorm']['components'] = %w(st2common)
 default['stackstorm']['service_binary'] = {}
 
 default['stackstorm']['component_provides'] = {
-  st2actions: %W(st2actionrunner st2resultstracker st2notifier),
+  st2actions: %w(st2actionrunner st2resultstracker st2notifier),
   st2api: %w(st2api),
   st2reactor: %w(st2rulesengine st2sensorcontainer)
 }

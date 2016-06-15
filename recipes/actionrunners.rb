@@ -8,7 +8,7 @@
 # Recipe brings up StackStorm action runner system services.
 #
 
-self.send :extend, StackstormCookbook::RecipeHelpers
+send :extend, StackstormCookbook::RecipeHelpers
 return unless apply_components.include?('st2actions')
 include_recipe "stackstorm::_packages"
 include_recipe 'stackstorm::config'
