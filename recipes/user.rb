@@ -75,7 +75,7 @@ end
 
 # sudo privileges for stanley
 sudo conf.user do
-  user      conf.user
-  nopasswd  true
+  user conf.user
+  nopasswd true
   only_if { conf.enable_sudo }
 end

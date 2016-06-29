@@ -12,7 +12,5 @@ module StackstormCookbook
 
       node.default['stackstorm']['components'] = components.uniq
     end
-
-    private
   end
 end

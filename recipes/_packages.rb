@@ -9,8 +9,6 @@
 
 include_recipe 'stackstorm::_initial'
 
-#%w( git python python-dev libffi-dev libpq-dev).each { |p| package p }
-
 node.override['stackstorm']['bin_dir'] = '/usr/bin'
 node.override['stackstorm']['python_binary'] = node['python']['binary']
 
@@ -20,19 +18,19 @@ when 'fedora', 'rhel'
   type = 'rpm'
 end
 
-packagecloud_repo "StackStorm/stable" do
+packagecloud_repo 'StackStorm/stable' do
   type type
 end
 
 # Install packages
-node['stackstorm']['install_repo']['packages'].each {|p| package p}
+node['stackstorm']['install_repo']['packages'].each { |p| package p }
 
 package 'st2debug' do
   only_if { node['stackstorm']['install_repo']['debug_package'] == true }
 end
 
 # Apply st2 components
-self.send :extend, StackstormCookbook::RecipeHelpers
+send :extend, StackstormCookbook::RecipeHelpers
 components = apply_components
 
 components.each do |component|
@@ -43,11 +41,9 @@ components.each do |component|
     next if service_name == 'st2actionrunner'
     service "#{recipe_name} enable and start StackStorm service #{service_name}" do
       service_name service_name
-      action [ :enable, :start ]
+      action [:enable, :start]
     end
   end
 end
 
-if components.include?('st2actions')
-  include_recipe 'stackstorm::actionrunners'
-end
+include_recipe 'stackstorm::actionrunners' if components.include?('st2actions')

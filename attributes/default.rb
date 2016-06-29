@@ -1,4 +1,4 @@
-default['stackstorm']['api_url'] = "http://127.0.0.1:9101"
+default['stackstorm']['api_url'] = 'http://127.0.0.1:9101'
 default['stackstorm']['home'] = '/opt/stackstorm'
 default['stackstorm']['bin_dir'] = '/usr/bin'
 default['stackstorm']['etc_dir'] = '/etc/st2'
