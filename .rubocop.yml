@@ -9,11 +9,23 @@ Metrics/AbcSize:
   Enabled: true
   Max: 30
 
+Metrics/LineLength:
+  Description: 'Limit lines to 200 characters.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+  Enabled: true
+  Max: 200
+  Exclude:
+    - recipes/bundle.rb
+
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 30 lines of code.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
   Enabled: true
   Max: 30
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
 
 Style/NumericLiterals:
   Description: >-
@@ -23,17 +35,12 @@ Style/NumericLiterals:
   Enabled: true
   MinDigits: 6
 
-Metrics/LineLength:
-  Description: 'Limit lines to 200 characters.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+Style/NumericLiteralPrefix:
+  Description: 'Use smallcase prefixes for numeric literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#numeric-literal-prefixes'
+  EnforcedOctalStyle: zero_only
   Enabled: true
-  Max: 200
-  Exclude:
-    - recipes/bundle.rb
 
-Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
-  Enabled: false
 
 Style/RegexpLiteral:
   Description: 'Use / or %r around regular expressions.'
