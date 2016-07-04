@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 group :testing do
+  gem 'chefspec'
   gem 'foodcritic'
+  gem 'pry'
   gem 'rake'
   gem 'rubocop'
 end
