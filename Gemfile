@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :testing do
+  gem 'berkshelf'
   gem 'chefspec'
   gem 'foodcritic'
   gem 'pry'
@@ -9,7 +10,6 @@ group :testing do
 end
 
 group :integration do
-  gem 'berkshelf'
   gem 'kitchen-docker'
   gem 'kitchen-vagrant'
   gem 'test-kitchen'
