@@ -16,6 +16,7 @@ Metrics/LineLength:
   Max: 200
   Exclude:
     - recipes/bundle.rb
+    - spec/recipes/bundle_spec.rb
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 30 lines of code.'
