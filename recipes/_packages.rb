@@ -12,11 +12,12 @@ include_recipe 'stackstorm::_initial'
 node.override['stackstorm']['bin_dir'] = '/usr/bin'
 node.override['stackstorm']['python_binary'] = node['python']['binary']
 
-type = 'deb'
-case node['platform_family']
-when 'fedora', 'rhel'
-  type = 'rpm'
-end
+type = case node['platform_family']
+       when 'fedora', 'rhel'
+         'rpm'
+       else
+         'deb'
+       end
 
 packagecloud_repo 'StackStorm/stable' do
   type type

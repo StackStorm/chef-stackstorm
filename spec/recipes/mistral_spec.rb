@@ -8,8 +8,8 @@ describe 'stackstorm::mistral' do
   context 'with default node attributes' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
-    it 'should include recipe openstack-mistral' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral')
+    it 'should include recipe mistral' do
+      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mistral')
       chef_run
     end
 
@@ -41,28 +41,6 @@ describe 'stackstorm::mistral' do
 
     it 'should override "node[\'openstack-mistral\'][\'db_initialize\'][\'password\']"' do
       expect(chef_run.node['openstack-mistral']['db_initialize']['password']).to eq('ilikerandompasswords')
-    end
-
-    it 'should create mistral "default"' do
-      skip('openstack-mistral cookbook is missing chefspec matchers')
-      expect(chef_run).to create_mistral('default').with(
-        options: {
-          database: {
-            connection: 'mysql://mistral:StackStorm@127.0.0.1/mistral'
-          }
-        }
-      )
-    end
-
-    it 'should start mistral "default"' do
-      skip('openstack-mistral cookbook is missing chefspec matchers')
-      expect(chef_run).to start_mistral('default').with(
-        options: {
-          database: {
-            connection: 'mysql://mistral:StackStorm@127.0.0.1/mistral'
-          }
-        }
-      )
     end
   end
 end

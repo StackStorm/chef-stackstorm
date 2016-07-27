@@ -61,7 +61,7 @@ There are different attributes providing options values which are substituted in
 
 StackStorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.
 
-Usage of mistral is optional and provided by the mistral cookbook, details are [here](https://github.com/StackStorm/chef-openstack-mistral).
+Usage of mistral is provided by the mistral cookbook, details are [here](https://github.com/StackStorm/chef-openstack-mistral)
 
 To chose specific roles for a node define `['stackstorm']['roles']` attribute to contain one of the following roles: *controller, worker, client*, or their combination combination. For example with a json attribute file.
 
