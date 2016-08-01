@@ -1,8 +1,0 @@
-# StackStorm actionrunner parent task. It's used to start multiple
-# actionrunner processes.
-
-description     "StackStorm action runner task"
-author          "chef-client"
-
-start on filesystem and net-device-up IFACE!=lo
-stop on starting rc RUNLEVEL=[016]

@@ -8,27 +8,19 @@ describe 'stackstorm::mistral' do
   context 'with default node attributes' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
-    it 'should include recipe mistral' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mistral')
+    it 'should include recipe openstack-mistral' do
+      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral')
       chef_run
     end
 
-    it 'should create mysql_service "default"' do
-      expect(chef_run).to create_mysql_service('default').with(
-        port: '3306',
-        initial_root_password: 'ilikerandompasswords'
-      )
+    it 'should include recipe rabbitmq' do
+      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq')
+      chef_run
     end
 
-    it 'should start mysql_service "default"' do
-      expect(chef_run).to start_mysql_service('default').with(
-        port: '3306',
-        initial_root_password: 'ilikerandompasswords'
-      )
-    end
-
-    it 'should create mysql_client "default"' do
-      expect(chef_run).to create_mysql_client('default')
+    it 'should include recipe openstack-mistral::_database' do
+      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral::_database')
+      chef_run
     end
 
     it 'should override "node[\'openstack-mistral\'][\'etc_dir\']"' do
