@@ -31,14 +31,6 @@ describe 'stackstorm::_packages' do
       expect(chef_run).to install_package('st2')
     end
 
-    it 'should install pacakge "st2mistral"' do
-      expect(chef_run).to install_package('st2mistral')
-    end
-
-    it 'should not install pacakge "st2debug"' do
-      expect(chef_run).to_not install_package('st2debug')
-    end
-
     it 'should override "node[\'stackstorm\'][\'components\']"' do
       expect(chef_run.node['stackstorm']['components']).to eq(
         %w(

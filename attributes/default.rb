@@ -30,6 +30,4 @@ default['stackstorm']['component_provides'] = {
 # It's recommended to use the install_repo
 default['stackstorm']['install_repo']['suite'] = 'stable'
 default['stackstorm']['install_repo']['debug_package'] = false
-default['stackstorm']['install_repo']['packages'] = %w(st2 st2mistral)
-
-default['openstack-mistral']['home'] = '/opt/stackstorm/mistral'
+default['stackstorm']['install_repo']['packages'] = %w(st2)

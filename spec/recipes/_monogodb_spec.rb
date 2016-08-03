@@ -93,7 +93,7 @@ describe 'stackstorm::_mongodb' do
 
     it 'should create mongodb_instance "instance_name"' do
       skip('mongodb cookbook is missing chefspec matchers')
-      expect(chef_run).to_not craete_mongodb_instance('instance_name').with(
+      expect(chef_run).to_not create_mongodb_instance('mongodb').with(
         mongodb_type: 'mongod',
         bind_ip: '0.0.0.0',
         port: 27017,
