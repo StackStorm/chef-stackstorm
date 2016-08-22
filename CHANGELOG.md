@@ -1,3 +1,7 @@
+# 0.3.0
+
+* Support installing via system packaginpackagingg.
+
 # 0.2.2
 
  * Native repository layout support
