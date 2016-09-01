@@ -12,7 +12,7 @@ Starting with version **0.3.0*, Packagecloud repo will be used to install Stacks
 
 ## Supported Platforms
 
-Tested to work on *ubuntu 14.04*, *fedora 20* and *centos 7.0*.
+Tested to work on *ubuntu 14.04* and *centos 7.2*.
 
 ## Attributes
 
