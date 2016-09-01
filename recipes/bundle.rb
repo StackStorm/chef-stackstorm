@@ -44,16 +44,6 @@ node.default['stackstorm']['user']['ssh_pub'] = pubkey
 node.default['stackstorm']['user']['ssh_key'] = prikey
 node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
 
-if platform_family?('fedora')
-  node.override['yum']['epel']['enabled'] = false
-  node.override['rabbitmq']['use_distro_version'] = true
-  node.override['rabbitmq']['pin_distro_version'] = false
-
-  if node['platform_version'].to_i > 17
-    node.override['yum']['erlang_solutions']['enabled'] = false
-  end
-end
-
 include_recipe 'stackstorm::_initial'
 include_recipe 'stackstorm::_packages'
 include_recipe 'stackstorm::_mongodb'
