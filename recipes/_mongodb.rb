@@ -11,7 +11,7 @@ include_recipe 'mongodb::install'
 
 # Remove conflicting configuration of systemd services, since they don't
 # start properly with the configuration provided by mongodb cookbook.
-if %w(rhel fedora).include?(node['platform_family'])
+if %w(rhel).include?(node['platform_family'])
   %w(s d).each do |letter|
     service "st2 remove systemd mongo#{letter} service" do
       service_name "mongo#{letter}"

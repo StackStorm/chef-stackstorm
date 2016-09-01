@@ -13,7 +13,7 @@ node.override['stackstorm']['bin_dir'] = '/usr/bin'
 node.override['stackstorm']['python_binary'] = node['python']['binary']
 
 type = case node['platform_family']
-       when 'fedora', 'rhel'
+       when 'rhel'
          'rpm'
        else
          'deb'

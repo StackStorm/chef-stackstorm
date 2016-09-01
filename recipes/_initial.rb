@@ -20,10 +20,10 @@ user 'st2' do
   action :create
 end
 
-# Fix localhost in hosts, somehow missing on Fedora 20
+# Fix localhost in hosts
 hostsfile_entry '127.0.0.1' do
   hostname 'localhost'
   comment 'Appended by st2 cookbook'
   action :append
-  only_if { platform_family?('fedora') || platform_family?('rhel') }
+  only_if { platform_family?('rhel') }
 end
