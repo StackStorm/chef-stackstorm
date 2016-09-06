@@ -30,5 +30,5 @@ default['stackstorm']['config'] = {
   db_name: 'st2',
   db_username: nil,
   db_password: nil,
-  mask_secrets: true,
+  mask_secrets: true
 }
