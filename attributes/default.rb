@@ -14,9 +14,6 @@ default['stackstorm']['action_runners'] = 10
 default['stackstorm']['roles'] = []
 default['stackstorm']['on_config_update'] = :restart
 
-# Will be set by actual install provider
-default['stackstorm']['python_binary'] = nil
-
 # Will be populated automaticaly when roles use, unless overrided.
 default['stackstorm']['components'] = %w(st2common)
 default['stackstorm']['service_binary'] = {}
