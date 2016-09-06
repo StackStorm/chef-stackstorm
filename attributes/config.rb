@@ -3,8 +3,12 @@ include_attribute 'stackstorm::user'
 # Config defaults options
 default['stackstorm']['config'] = {
   api_url: 'http://localhost:9101',
-  conf_root: '/etc',
+  api_host: '0.0.0.0',
+  api_port: 9101,
+  conf_root: '/etc/st2',
   debug: false,
+  auth_host: '0.0.0.0',
+  auth_port: 9100,
   auth_use_ssl: false,
   auth_enable: true,
   rmq_host: 'localhost',
@@ -26,5 +30,5 @@ default['stackstorm']['config'] = {
   db_name: 'st2',
   db_username: nil,
   db_password: nil,
-  mask_secrets: true
+  mask_secrets: true,
 }
