@@ -17,10 +17,6 @@ describe 'stackstorm::_packages' do
       expect(chef_run.node['stackstorm']['bin_dir']).to eq('/usr/bin')
     end
 
-    it 'should override "node[\'stackstorm\'][\'python_binary\']"' do
-      expect(chef_run.node['stackstorm']['python_binary']).to eq('/usr/bin/python')
-    end
-
     it 'should create packagecloud_repo "StackStorm/stable"' do
       expect(chef_run).to create_packagecloud_repo('StackStorm/stable').with(
         type: 'rpm'

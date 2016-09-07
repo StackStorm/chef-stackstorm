@@ -10,7 +10,6 @@
 include_recipe 'stackstorm::_initial'
 
 node.override['stackstorm']['bin_dir'] = '/usr/bin'
-node.override['stackstorm']['python_binary'] = node['python']['binary']
 
 type = case node['platform_family']
        when 'rhel'

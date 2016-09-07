@@ -85,8 +85,8 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
       chef_run
     end
 
-    it 'should include recipe stackstorm::_mongodb' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::_mongodb')
+    it 'should include recipe mongodb3::default' do
+      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
       chef_run
     end
 
