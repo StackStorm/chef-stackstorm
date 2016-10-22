@@ -16,7 +16,7 @@ platforms:
     run_command: /sbin/init
     provision_command:
       - /usr/bin/apt-get update
-      - /usr/bin/apt-get install -y apt-transport-https net-tools libpq-dev
+      - /usr/bin/apt-get install -y apt-transport-https net-tools initscripts
 - name: centos-7.2
   driver:
     image: centos:7
