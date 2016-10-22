@@ -28,4 +28,4 @@ script:
   - /opt/chefdk/bin/foodcritic . --exclude spec
   - /opt/chefdk/embedded/bin/rspec spec
   - /opt/chefdk/bin/kitchen --version
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/kitchen verify ${INSTANCE}
+  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/kitchen test ${INSTANCE}
