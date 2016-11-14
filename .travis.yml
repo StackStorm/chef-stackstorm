@@ -9,6 +9,10 @@ addons:
    packages:
      - chefdk
 
+branches:
+  only:
+    - master
+
 env:
   matrix:
   - INSTANCE=default-ubuntu-1404
