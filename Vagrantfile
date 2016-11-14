@@ -1,22 +1,20 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+def plugin_installed?(name)
+  return if Vagrant.has_plugin?(name)
+  puts "Vagrant plugin '#{name}' is NOT installed."
+  puts 'Please run:'
+  puts "\tvagrant plugin install #{name}"
+  exit(1)
+end
+
+# Make sure the needed plugins are installed.
+plugin_installed?('vagrant-berkshelf')
+plugin_installed?('vagrant-omnibus')
+
+
 Vagrant.require_version '>= 1.5.0'
-
-# Autoinstall for vagrant-omnibus plugin.
-# See https://github.com/chef/vagrant-omnibus
-unless Vagrant.has_plugin?('vagrant-omnibus')
-  system('vagrant plugin install vagrant-omnibus') || exit!
-  exit system('vagrant', *ARGV)
-end
-
-# Autoinstall for vagrant-berkshelf plugin.
-# See https://github.com/chef/vagrant-berkshelf
-unless Vagrant.has_plugin?('vagrant-berkshelf')
-  system('vagrant plugin install vagrant-berkshelf') || exit!
-  exit system('vagrant', *ARGV)
-end
-
 Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = 'chef-stackstorm'
