@@ -1,36 +1,29 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = '2'.freeze
-
 Vagrant.require_version '>= 1.5.0'
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+# Autoinstall for vagrant-omnibus plugin.
+# See https://github.com/chef/vagrant-omnibus
+unless Vagrant.has_plugin?('vagrant-omnibus')
+  system('vagrant plugin install vagrant-omnibus') || exit!
+  exit system('vagrant', *ARGV)
+end
 
-  config.vm.hostname = 'stackstorm-berkshelf'
+# Autoinstall for vagrant-berkshelf plugin.
+# See https://github.com/chef/vagrant-berkshelf
+unless Vagrant.has_plugin?('vagrant-berkshelf')
+  system('vagrant plugin install vagrant-berkshelf') || exit!
+  exit system('vagrant', *ARGV)
+end
+
+Vagrant.configure(2) do |config|
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.hostname = 'chef-stackstorm'
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   # Set the version of chef to install using the vagrant-omnibus plugin
-  # NOTE: You will need to install the vagrant-omnibus plugin:
-  #
-  #   $ vagrant plugin install vagrant-omnibus
-  #
-  if Vagrant.has_plugin?('vagrant-omnibus')
-    config.omnibus.chef_version = 'latest'
-  end
-
-  # Every Vagrant virtual environment requires a box to build off of.
-  # If this value is a shorthand to a box in Vagrant Cloud then
-  # config.vm.box_url doesn't need to be specified.
-  config.vm.box = 'Berkshelf-CentOS-6.3-x86_64-minimal'
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # is not a Vagrant Cloud box and if it doesn't already exist on the
-  # user's system.
-  config.vm.box_url = 'https://dl.dropbox.com/u/31081437/Berkshelf-CentOS-6.3-x86_64-minimal.box'
+  config.omnibus.chef_version = 'latest'
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -48,27 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
-  # View the documentation for the provider you're using for more
-  # information on available options.
-
-  # The path to the Berksfile to use with Vagrant Berkshelf
-  # config.berkshelf.berksfile_path = "./Berksfile"
-
-  # Enabling the Berkshelf plugin. To enable this globally, add this configuration
-  # option to your ~/.vagrant.d/Vagrantfile file
-  config.berkshelf.enabled = true
+  config.vm.provider :virtualbox do |vb|
+    # Required for StackStorm to run properly
+    vb.memory = 2048
+  end
 
   # An array of symbols representing groups of cookbook described in the Vagrantfile
   # to exclusively install and copy to Vagrant's shelf.
