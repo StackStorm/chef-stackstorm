@@ -1,9 +1,31 @@
-language: ruby
-cache: bundler
-rvm:
-  - 2.2.5
-sudo: false
-branches:
-  only:
-    - master
-bundler_args: --without=integration
+# Use Travis's cointainer based infrastructure
+sudo: required
+services: docker
+
+addons:
+ apt:
+   sources:
+     - chef-stable-precise
+   packages:
+     - chefdk
+
+env:
+  matrix:
+  - INSTANCE=default-ubuntu-1404
+  - INSTANCE=default-centos-72
+
+before_script:
+  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
+  - sudo iptables -L DOCKER || sudo iptables -N DOCKER
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - /opt/chefdk/bin/chef gem install kitchen-docker
+
+script:
+  - /opt/chefdk/bin/chef --version
+  - /opt/chefdk/bin/cookstyle --version
+  - /opt/chefdk/bin/cookstyle
+  - /opt/chefdk/bin/foodcritic --version
+  - /opt/chefdk/bin/foodcritic . --exclude spec
+  - /opt/chefdk/embedded/bin/rspec spec
+  - /opt/chefdk/bin/kitchen --version
+  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/kitchen test ${INSTANCE}
