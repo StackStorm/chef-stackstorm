@@ -1,6 +1,8 @@
 include_attribute 'stackstorm::user'
 
 # Config defaults options
+# Ordered as they appear in original `st2.conf`:
+# https://github.com/StackStorm/st2/blob/master/conf/st2.package.conf
 default['stackstorm']['config'] = {
   api_url: 'http://127.0.0.1:9101',
   api_host: '0.0.0.0',

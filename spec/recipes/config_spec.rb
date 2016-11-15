@@ -133,6 +133,8 @@ db_name = st2
         group: 'root',
         mode: 0644,
         source: 'st2.conf.erb',
+        # Config options ordered as they appear in original `st2.conf`:
+        # https://github.com/StackStorm/st2/blob/master/conf/st2.package.conf
         variables: {
           'api_url' => 'http://127.0.0.1:9101',
           'api_host' => '0.0.0.0',
