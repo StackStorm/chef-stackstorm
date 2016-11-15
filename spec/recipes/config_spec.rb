@@ -44,7 +44,7 @@ backend = flat_file
 backend_kwargs = {"file_path": "/etc/st2/htpasswd"}
 
 # Base URL to the API endpoint excluding the version (e.g. http://myhost.net:9101/)
-api_url = http://localhost:9101
+api_url = http://127.0.0.1:9101
 
 [system]
 base_path = /opt/stackstorm
@@ -59,13 +59,13 @@ user = stanley
 ssh_key_file = /home/stanley/.ssh/id_rsa
 
 [messaging]
-url = amqp://guest:guest@localhost:5672/
+url = amqp://guest:guest@127.0.0.1:5672/
 
 [ssh_runner]
 remote_dir = /tmp
 
 [action_sensor]
-triggers_base_url = http://localhost:9101/v1/triggertypes/
+triggers_base_url = http://127.0.0.1:9101/v1/triggertypes/
 
 [resultstracker]
 logging = /etc/st2actions/console.conf
@@ -74,7 +74,7 @@ logging = /etc/st2actions/console.conf
 logging = /etc/st2actions/console.conf
 
 [database]
-host = localhost
+host = 127.0.0.1
 port = 27017
 db_name = st2
 )
@@ -120,11 +120,11 @@ db_name = st2
         mode: 0644,
         source: 'st2.conf.erb',
         variables: {
-          'api_url' => 'http://localhost:9101',
+          'api_url' => 'http://127.0.0.1:9101',
           'debug' => false,
           'auth_use_ssl' => false,
           'auth_enable' => true,
-          'rmq_host' => 'localhost',
+          'rmq_host' => '127.0.0.1',
           'rmq_vhost' => nil,
           'rmq_username' => 'guest',
           'rmq_password' => 'guest',
@@ -132,13 +132,13 @@ db_name = st2
           'allow_origin' => '*',
           'auth_standalone_file' => '/etc/st2/htpasswd',
           'syslog_enabled' => false,
-          'syslog_host' => 'localhost',
+          'syslog_host' => '127.0.0.1',
           'syslog_port' => 514,
           'syslog_facility' => 'local7',
           'syslog_protocol' => 'udp',
           'system_user' => 'stanley',
           'ssh_key_file' => '/home/stanley/.ssh/id_rsa',
-          'db_host' => 'localhost',
+          'db_host' => '127.0.0.1',
           'db_port' => 27017,
           'db_name' => 'st2',
           'db_username' => nil,
