@@ -37,12 +37,5 @@ describe 'stackstorm::_initial' do
         }
       )
     end
-
-    it 'should append hostsfile_entry "st2"' do
-      expect(chef_run).to append_hostsfile_entry('127.0.0.1').with(
-        hostname: 'localhost',
-        comment: 'Appended by st2 cookbook'
-      )
-    end
   end
 end
