@@ -121,7 +121,6 @@ db_name = st2
         source: 'st2.conf.erb',
         variables: {
           'api_url' => 'http://localhost:9101',
-          'conf_root' => '/etc',
           'debug' => false,
           'auth_use_ssl' => false,
           'auth_enable' => true,

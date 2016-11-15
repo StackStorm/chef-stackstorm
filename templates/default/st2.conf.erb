@@ -5,30 +5,30 @@
 # Host and port to bind the API server.
 host = <%= @api_host %>
 port = <%= @api_port %>
-logging = <%= @conf_root %>/logging.api.conf
+logging = /etc/st2/logging.api.conf
 mask_secrets = <%= @mask_secrets %>
 # allow_origin is required for handling CORS in st2 web UI.
 # allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
 allow_origin = <%= @allow_origin %>
 
 [stream]
-logging = <%= @conf_root %>/logging.stream.conf
+logging = /etc/st2/logging.stream.conf
 
 [sensorcontainer]
-logging = <%= @conf_root %>/logging.sensorcontainer.conf
+logging = /etc/st2/logging.sensorcontainer.conf
 
 [rulesengine]
-logging = <%= @conf_root %>/logging.rulesengine.conf
+logging = /etc/st2/logging.rulesengine.conf
 
 [actionrunner]
-logging = <%= @conf_root %>/logging.actionrunner.conf
+logging = /etc/st2/logging.actionrunner.conf
 virtualenv_opts = --always-copy
 
 [resultstracker]
-logging = <%= @conf_root %>/logging.resultstracker.conf
+logging = /etc/st2/logging.resultstracker.conf
 
 [notifier]
-logging = <%= @conf_root %>/logging.notifier.conf
+logging = /etc/st2/logging.notifier.conf
 
 [exporter]
 logging = /etc/st2/logging.exporter.conf
@@ -42,7 +42,7 @@ port = <%= @auth_port %>
 use_ssl = <%= @auth_use_ssl %>
 debug = <%= @debug ? 'true' : 'false' %>
 enable = <%= @auth_enable %>
-logging = <%= @conf_root %>/logging.auth.conf
+logging = /etc/st2/logging.auth.conf
 
 mode = standalone
 # Note: Settings bellow are only used in "standalone" mode
