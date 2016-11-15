@@ -9,6 +9,13 @@ addons:
    packages:
      - chefdk
 
+# Don't `bundle install`
+install: echo "skip bundle install"
+
+branches:
+  only:
+    - master
+
 env:
   matrix:
   - INSTANCE=default-ubuntu-1404
@@ -23,9 +30,7 @@ before_script:
 script:
   - /opt/chefdk/bin/chef --version
   - /opt/chefdk/bin/cookstyle --version
-  - /opt/chefdk/bin/cookstyle
   - /opt/chefdk/bin/foodcritic --version
-  - /opt/chefdk/bin/foodcritic . --exclude spec
-  - /opt/chefdk/embedded/bin/rspec spec
   - /opt/chefdk/bin/kitchen --version
+  - /opt/chefdk/bin/chef exec rake
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/kitchen test ${INSTANCE}
