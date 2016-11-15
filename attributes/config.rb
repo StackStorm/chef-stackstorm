@@ -5,7 +5,6 @@ default['stackstorm']['config'] = {
   api_url: 'http://localhost:9101',
   api_host: '0.0.0.0',
   api_port: 9101,
-  conf_root: '/etc/st2',
   debug: false,
   auth_host: '0.0.0.0',
   auth_port: 9100,
