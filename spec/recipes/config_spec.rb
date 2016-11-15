@@ -15,30 +15,47 @@ describe 'stackstorm::config' do
 # Host and port to bind the API server.
 host = 0.0.0.0
 port = 9101
-logging = /etc/st2api/console.conf
+logging = /etc/st2/logging.api.conf
 mask_secrets = true
 # allow_origin is required for handling CORS in st2 web UI.
 # allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
 allow_origin = *
 
+[stream]
+logging = /etc/st2/logging.stream.conf
+
 [sensorcontainer]
-logging = /etc/st2reactor/console.conf
+logging = /etc/st2/logging.sensorcontainer.conf
 
 [rulesengine]
-logging = /etc/st2reactor/console.conf
+logging = /etc/st2/logging.rulesengine.conf
 
 [actionrunner]
-logging = /etc/st2actions/console.conf
+logging = /etc/st2/logging.actionrunner.conf
+virtualenv_opts = --always-copy
+
+[resultstracker]
+logging = /etc/st2/logging.resultstracker.conf
+
+[notifier]
+logging = /etc/st2/logging.notifier.conf
+
+[exporter]
+logging = /etc/st2/logging.exporter.conf
+
+[garbagecollector]
+logging = /etc/st2/logging.garbagecollector.conf
 
 [auth]
 host = 0.0.0.0
 port = 9100
-use_ssl = false
-debug = 'false'
-enable = true
-logging = /etc/st2api/console.conf
+use_ssl = False
+debug = False
+enable = True
+logging = /etc/st2/logging.auth.conf
 
 mode = standalone
+
 # Note: Settings bellow are only used in "standalone" mode
 backend = flat_file
 backend_kwargs = {"file_path": "/etc/st2/htpasswd"}
@@ -49,10 +66,19 @@ api_url = http://127.0.0.1:9101
 [system]
 base_path = /opt/stackstorm
 
+# [webui]
+# webui_base_url = https://mywebhost.domain
+
+[syslog]
+host = 127.0.0.1
+port = 514
+facility = local7
+protocol = udp
+
 [log]
 excludes = requests,paramiko
 redirect_stderr = False
-mask_secrets = true
+mask_secrets = True
 
 [system_user]
 user = stanley
@@ -66,12 +92,6 @@ remote_dir = /tmp
 
 [action_sensor]
 triggers_base_url = http://127.0.0.1:9101/v1/triggertypes/
-
-[resultstracker]
-logging = /etc/st2actions/console.conf
-
-[notifier]
-logging = /etc/st2actions/console.conf
 
 [database]
 host = 127.0.0.1
