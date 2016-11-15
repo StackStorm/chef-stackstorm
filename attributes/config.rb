@@ -35,5 +35,5 @@ default['stackstorm']['config'] = {
   db_port: 27017,
   db_name: 'st2',
   db_username: nil,
-  db_password: nil,
+  db_password: nil
 }

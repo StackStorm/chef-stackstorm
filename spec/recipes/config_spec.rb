@@ -161,7 +161,7 @@ db_name = st2
           'db_port' => 27017,
           'db_name' => 'st2',
           'db_username' => nil,
-          'db_password' => nil,
+          'db_password' => nil
         }
       )
     end
