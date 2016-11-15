@@ -25,5 +25,4 @@ hostsfile_entry '127.0.0.1' do
   hostname 'localhost'
   comment 'Appended by st2 cookbook'
   action :append
-  only_if { platform_family?('rhel') }
 end
