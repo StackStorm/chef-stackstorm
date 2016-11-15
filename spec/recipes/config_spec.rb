@@ -134,29 +134,36 @@ db_name = st2
         mode: 0644,
         source: 'st2.conf.erb',
         variables: {
-          'mask_secrets' => true,
-          'allow_origin' => '*',
-          'debug' => false,
           'api_url' => 'http://127.0.0.1:9101',
           'api_host' => '0.0.0.0',
           'api_port' => 9101,
+          'api_mask_secrets' => true,
+          'api_allow_origin' => '*',
+
           'auth_host' => '0.0.0.0',
           'auth_port' => 9100,
           'auth_use_ssl' => false,
+          'auth_debug' => false,
           'auth_enable' => true,
           'auth_standalone_file' => '/etc/st2/htpasswd',
+
           'syslog_enabled' => false,
           'syslog_host' => '127.0.0.1',
           'syslog_port' => 514,
           'syslog_facility' => 'local7',
           'syslog_protocol' => 'udp',
+
+          'log_mask_secrets' => true,
+
           'system_user' => 'stanley',
           'ssh_key_file' => '/home/stanley/.ssh/id_rsa',
+
           'rmq_host' => '127.0.0.1',
           'rmq_vhost' => nil,
           'rmq_username' => 'guest',
           'rmq_password' => 'guest',
           'rmq_port' => 5672,
+
           'db_host' => '127.0.0.1',
           'db_port' => 27017,
           'db_name' => 'st2',

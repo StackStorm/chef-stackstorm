@@ -2,17 +2,16 @@ include_attribute 'stackstorm::user'
 
 # Config defaults options
 default['stackstorm']['config'] = {
-  mask_secrets: true,
-  allow_origin: '*',
-  debug: false,
-
   api_url: 'http://127.0.0.1:9101',
   api_host: '0.0.0.0',
   api_port: 9101,
+  api_mask_secrets: true,
+  api_allow_origin: '*',
 
   auth_host: '0.0.0.0',
   auth_port: 9100,
   auth_use_ssl: false,
+  auth_debug: false,
   auth_enable: true,
   auth_standalone_file: '/etc/st2/htpasswd',
 
@@ -21,6 +20,8 @@ default['stackstorm']['config'] = {
   syslog_port: 514,
   syslog_facility: 'local7',
   syslog_protocol: 'udp',
+
+  log_mask_secrets: true,
 
   system_user: node['stackstorm']['user']['user'],
   ssh_key_file: "#{node['stackstorm']['user']['home']}/.ssh/id_rsa",
