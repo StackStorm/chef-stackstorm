@@ -20,10 +20,9 @@ __NOTE__: By default, latest stable version of `st2` and `st2mistral` will be in
 | `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
 | `['stackstorm']['home']` | String | Base directory where is **St2** is installed (same path as in the *os-packages*). | `'/opt/stackstorm'` |
 | `['stackstorm']['etc_dir']` | String | Configuration directory of **St2**. | `'/etc/st2'` |
-| `['stackstorm']['conf_path']` | String | **St2** configuration file path. | `'/etc/st2/st2.conf'` |
 | `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. (TODO) | 10 |
 | `['stackstorm']['roles']` | Array | List of roles to bring up on a node. Set a combination of the following roles: *controller, worker and client*. | `[]` |
-| `['stackstorm'][config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
+| `['stackstorm']['config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
 
 ### User management
 | Key | Type | Description | Default |

@@ -1,7 +1,6 @@
 default['stackstorm']['api_url'] = 'http://127.0.0.1:9101'
 default['stackstorm']['home'] = '/opt/stackstorm'
 default['stackstorm']['etc_dir'] = '/etc/st2'
-default['stackstorm']['conf_path'] = '/etc/st2/st2.conf'
 
 # TODO: support customizable workers, default to 10 via package
 default['stackstorm']['action_runners'] = 10
