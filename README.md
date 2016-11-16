@@ -4,24 +4,16 @@
 [![Chef cookbook at Supermarket](https://img.shields.io/cookbook/v/stackstorm.svg?maxAge=2592000)](https://supermarket.chef.io/cookbooks/stackstorm)
 [![Join our community Slack](https://stackstorm-community.herokuapp.com/badge.svg)](https://stackstorm.typeform.com/to/K76GRP)
 
-Cookbook for [StackStorm](http://www.stackstorm.com) Automation as a Service. This cookbook is used to install and bring up **St2** components using Chef.
-
-## Compatibility
-
-Use version **<0.2.5** of this cookbook with chef **<12.4.0**.
-
-Starting with version **0.3.0*, Packagecloud repo will be used to install Stackstorm packages instead of building from source.
+Cookbook for [StackStorm](https://stackstorm.com/) Automation as a Service. This cookbook is used to install and bring up **st2** components using Chef.
 
 ## Supported Platforms
-
-Tested to work on *ubuntu 14.04* and *centos 7.2*.
+* Ubuntu 14.04 LTS
+* CentOS 7.2
 
 ## Attributes
-
-__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed. Overwrite this behavior using custom wrapper cookbook.
+__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed from [PackageCloud Repository](https://packagecloud.io/stackstorm/stable). Overwrite this behavior using custom wrapper cookbook.
 
 ### Common attributes
-
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
 | `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
@@ -39,7 +31,6 @@ __NOTE__: By default, latest stable version of `st2` and `st2mistral` will be in
 | `['stackstorm'][config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
 
 ### User management
-
 | Key | Type | Description | Default |
 | --- | --- | --- | --- |
 | `['stackstorm']['user']['user']` | String | System user used by stackstorm stack. | `'stanley'` |
@@ -60,7 +51,6 @@ Stanley's ssh key is automatically generated if no **ssh_key** is provided. This
 There are different attributes providing options values which are substituted into **st2.conf** file. For more details have look at the [config.rb](attributes/config.rb).
 
 ## Usage
-
 StackStorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.
 
 Usage of mistral is provided by the mistral cookbook, details are [here](https://github.com/StackStorm/chef-openstack-mistral)
@@ -80,21 +70,17 @@ To chose specific roles for a node define `['stackstorm']['roles']` attribute to
 ```
 
 ## Invocation
-
 Define roles with the `stackstorm.roles` attribute, provide valid configuration options and include `"recipe[stackstorm::default]"` into your run list. The default recipe downloads and installs StackStorm packages required for given roles, writes configuration files and filnally brings up StackStorm system services.
 
 **Mind that the valid configuration must be provided such as RabbitMQ and MongoDB endpoints**. Otherwise StackStorm services fail when trying to establish connections.
 
 ### stackstorm::bundle
-
 For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as all required components such as *RabbitMQ, MongoDB and Mistral* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into your run list.
 
 
 ## License and Authors
-
 * Author:: StackStorm (st2-dev) (<info@stackstorm.com>)
 * Author:: Denis Baryshev (<dennybaa@gmail.com>)
 
 ## Contributors
-
 * Bao Nguyen (<ngqbao@gmail.com>)
