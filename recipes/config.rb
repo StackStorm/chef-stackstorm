@@ -26,11 +26,3 @@ template ':create StackStorm configuration' do
   variables lazy { node['stackstorm']['config'] }
   action :create
 end
-
-directory 'st2:log_dir' do
-  path node['stackstorm']['log_dir']
-  owner node['stackstorm']['run_user']
-  group node['stackstorm']['run_group']
-  mode '0755'
-  action :create
-end

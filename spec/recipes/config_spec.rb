@@ -174,14 +174,5 @@ db_name = st2
         }
       )
     end
-
-    it 'should create directory "st2:log_dir"' do
-      expect(chef_run).to create_directory('st2:log_dir').with(
-        path: '/var/log/st2',
-        owner: 'st2',
-        group: 'st2',
-        mode: '0755'
-      )
-    end
   end
 end

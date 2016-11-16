@@ -21,7 +21,6 @@ __NOTE__: By default, latest stable version of `st2` and `st2mistral` will be in
 | `['stackstorm']['home']` | String | Base directory where is **St2** is installed (same path as in the *os-packages*). | `'/opt/stackstorm'` |
 | `['stackstorm']['etc_dir']` | String | Configuration directory of **St2**. | `'/etc/st2'` |
 | `['stackstorm']['conf_path']` | String | **St2** configuration file path. | `'/etc/st2/st2.conf'` |
-| `['stackstorm']['log_dir']` | String | Log directory path where **St2** services write log files. | `'/var/log/st2'` |
 | `['stackstorm']['run_user']` | String | User used to run **St2** services (except *action runners*). | `'st2'` |
 | `['stackstorm']['run_group']` | String | Group used to run **St2** services (except *action runners*). | `'st2'` |
 | `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. (TODO) | 10 |
