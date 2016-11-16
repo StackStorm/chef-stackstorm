@@ -7,7 +7,7 @@
 
 # Fetches remote packages from StackStorm repository.
 
-include_recipe 'stackstorm::_initial'
+include_recipe 'apt'
 
 type = case node['platform_family']
        when 'rhel'

@@ -9,16 +9,16 @@ include_recipe 'stackstorm::user'
 
 # Backup original st2.conf
 file ':backup StackStorm dist configuration' do
-  path "#{node['stackstorm']['etc_dir']}/st2.conf.dist"
-  content lazy { ::IO.read("#{node['stackstorm']['etc_dir']}/st2.conf") }
-  not_if { ::File.exist?("#{node['stackstorm']['etc_dir']}/st2.conf.dist") }
-  only_if { ::File.exist?("#{node['stackstorm']['etc_dir']}/st2.conf") }
+  path '/etc/st2/st2.conf.dist'
+  content lazy { ::IO.read('/etc/st2/st2.conf') }
+  not_if { ::File.exist?('/etc/st2/st2.conf.dist') }
+  only_if { ::File.exist?('/etc/st2/st2.conf') }
   action :create
 end
 
 # Write config
 template ':create StackStorm configuration' do
-  path "#{node['stackstorm']['etc_dir']}/st2.conf"
+  path '/etc/st2/st2.conf'
   owner 'root'
   group 'root'
   mode 0644

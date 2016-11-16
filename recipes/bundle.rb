@@ -44,7 +44,6 @@ node.default['stackstorm']['user']['ssh_pub'] = pubkey
 node.default['stackstorm']['user']['ssh_key'] = prikey
 node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
 
-include_recipe 'stackstorm::_initial'
 include_recipe 'stackstorm::_packages'
 include_recipe 'mongodb3::default'
 include_recipe 'rabbitmq::default'
