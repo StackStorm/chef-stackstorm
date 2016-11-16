@@ -18,8 +18,9 @@ branches:
 
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1404
-  - INSTANCE=default-centos-72
+    - SUITE=default
+    - SUITE=integration:kitchen:default-ubuntu-1404
+    - SUITE=integration:kitchen:default-centos-72
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
@@ -32,5 +33,4 @@ script:
   - /opt/chefdk/bin/cookstyle --version
   - /opt/chefdk/bin/foodcritic --version
   - /opt/chefdk/bin/kitchen --version
-  - /opt/chefdk/bin/chef exec rake
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/kitchen test ${INSTANCE}
+  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/chef exec rake ${SUITE}
