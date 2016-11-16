@@ -18,7 +18,6 @@ __NOTE__: By default, latest stable version of `st2` and `st2mistral` will be in
 | --- | --- | :--- | --- |
 | `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
 | `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
-| `['stackstorm']['install_repo']['debug_package']` | Boolean | Set to `true` to install *st2debug* package. | `false` |
 | `['stackstorm']['home']` | String | Base directory where is **St2** is installed (same path as in the *os-packages*). | `'/opt/stackstorm'` |
 | `['stackstorm']['bin_dir']` | String | Directory where **St2** binaries are located. It can be overrided by the install recipe. | `'/usr/bin'` |
 | `['stackstorm']['etc_dir']` | String | Configuration directory of **St2**. | `'/etc/st2'` |

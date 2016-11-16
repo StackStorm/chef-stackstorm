@@ -41,10 +41,6 @@ end
 # Install packages
 node['stackstorm']['install_repo']['packages'].each { |p| package p }
 
-package 'st2debug' do
-  only_if { node['stackstorm']['install_repo']['debug_package'] == true }
-end
-
 # Apply st2 components
 send :extend, StackstormCookbook::RecipeHelpers
 components = apply_components

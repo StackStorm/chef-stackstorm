@@ -41,18 +41,6 @@ describe 'stackstorm::_packages' do
     end
   end
 
-  context "with node['stackstorm']['install_repo']['debug_package'] = true" do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new do |node|
-        node.normal['stackstorm']['install_repo']['debug_package'] = true
-      end.converge(described_recipe)
-    end
-
-    it 'should install pacakge "st2debug"' do
-      expect(chef_run).to install_package('st2debug')
-    end
-  end
-
   context "with node['stackstorm']['roles'] = ['controller']" do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
