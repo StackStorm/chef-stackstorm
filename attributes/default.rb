@@ -1,6 +1,5 @@
 default['stackstorm']['api_url'] = 'http://127.0.0.1:9101'
 default['stackstorm']['home'] = '/opt/stackstorm'
-default['stackstorm']['bin_dir'] = '/usr/bin'
 default['stackstorm']['etc_dir'] = '/etc/st2'
 default['stackstorm']['conf_path'] = '/etc/st2/st2.conf'
 default['stackstorm']['log_dir'] = '/var/log/st2'

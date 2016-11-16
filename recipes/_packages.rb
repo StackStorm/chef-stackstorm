@@ -9,8 +9,6 @@
 
 include_recipe 'stackstorm::_initial'
 
-node.override['stackstorm']['bin_dir'] = '/usr/bin'
-
 type = case node['platform_family']
        when 'rhel'
          'rpm'
