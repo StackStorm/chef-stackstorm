@@ -12,10 +12,3 @@ include_recipe 'apt'
     action :create
   end
 end
-
-# Create default user and group to run unprivileged StackStorm services.
-user 'st2' do
-  home '/home/st2'
-  supports manage_home: true
-  action :create
-end
