@@ -7,6 +7,15 @@
 
 include_recipe 'stackstorm::user'
 
+# Ensure directory for config is available
+directory ':create /etc/st2 directory' do
+  path '/etc/st2'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
 # Backup original st2.conf
 file ':backup StackStorm dist configuration' do
   path '/etc/st2/st2.conf.dist'
