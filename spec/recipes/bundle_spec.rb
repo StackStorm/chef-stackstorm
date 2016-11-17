@@ -41,16 +41,6 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 )
     end
 
-    it 'should override "node[\'stackstorm\'][\'roles\']"' do
-      expect(chef_run.node['stackstorm']['roles']).to eq(
-        %w(
-          controller
-          worker
-          client
-        )
-      )
-    end
-
     it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_pub\']"' do
       expect(chef_run.node['stackstorm']['user']['ssh_pub']).to eq(pubkey)
     end

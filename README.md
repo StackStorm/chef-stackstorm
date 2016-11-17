@@ -11,16 +11,14 @@ Cookbook for [StackStorm](https://stackstorm.com/) Automation as a Service. This
 * CentOS 7.2
 
 ## Attributes
-__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed from [PackageCloud Repository](https://packagecloud.io/stackstorm/stable). Overwrite this behavior using custom wrapper cookbook.
+__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed from [PackageCloud Repository](https://packagecloud.io/stackstorm/stable).
 
 ### Common attributes
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
-| `['stackstorm']['install_stackstorm']['build']` | String | Build number of stackstorm packages. | `'current'` |
-| `['stackstorm']['install_repo']['suite']` | String | Suite selects package repository, use *stable* or *unstable*. | `'stable'` |
-| `['stackstorm']['action_runners']` | Integer | Number of *action runners* to be spawned. (TODO) | 10 |
-| `['stackstorm']['roles']` | Array | List of roles to bring up on a node. Set a combination of the following roles: *controller, worker and client*. | `[]` |
-| `['stackstorm']['config']` | Hash | Various configuration options used to build up the configuration file. | *see attributes file* |
+| `['stackstorm']['config']` | Hash | Various configuration options used to build up the `st2.conf` configuration file. | *see attributes file* |
+
+There are different attributes providing options values which are substituted into **st2.conf** file. For more details have look at the [config.rb](attributes/config.rb).
 
 ### User management
 | Key | Type | Description | Default |
@@ -38,37 +36,11 @@ StackStorm uses **system_user** option to specify privileges used to execute loc
 
 Stanley's ssh key is automatically generated if no **ssh_key** is provided. This is the default behavior.
 
-### stackstorm.config attributes
-
-There are different attributes providing options values which are substituted into **st2.conf** file. For more details have look at the [config.rb](attributes/config.rb).
-
-## Usage
-StackStorm nodes can have several roles these are **controller** and **worker**. **Controller** nodes run *API service*, *sensor container* and others. While workers execute actions on nodes so they run only *action runner* and *mistral executor* services.
-
-Usage of mistral is provided by the mistral cookbook, details are [here](https://github.com/StackStorm/chef-openstack-mistral)
-
-To chose specific roles for a node define `['stackstorm']['roles']` attribute to contain one of the following roles: *controller, worker, client*, or their combination combination. For example with a json attribute file.
-
-```json
-{
-  "run_list": [ "recipe[stackstorm::default]" ],
-  "attributes": {
-    "stackstorm": {
-      "roles": [ "worker", "client" ],
-      "config": { "lots of": "configuration" }
-    }
-  }
-}
-```
-
-## Invocation
-Define roles with the `stackstorm.roles` attribute, provide valid configuration options and include `"recipe[stackstorm::default]"` into your run list. The default recipe downloads and installs StackStorm packages required for given roles, writes configuration files and filnally brings up StackStorm system services.
-
+## stackstorm:default
 **Mind that the valid configuration must be provided such as RabbitMQ and MongoDB endpoints**. Otherwise StackStorm services fail when trying to establish connections.
 
 ### stackstorm::bundle
-For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as all required components such as *RabbitMQ, MongoDB and Mistral* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into your run list.
-
+For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as all required components such as *RabbitMQ, MongoDB and [Mistral](https://github.com/StackStorm/chef-openstack-mistral)* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into your run list.
 
 ## License and Authors
 * Author:: StackStorm (st2-dev) (<info@stackstorm.com>)

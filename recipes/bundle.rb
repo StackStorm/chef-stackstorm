@@ -5,9 +5,8 @@
 # Copyright (C) 2015 StackStorm (info@stackstorm.com)
 #
 
-# StackStorm "all in one" recipe deploys st2 roles as well as dependant
+# StackStorm "all in one" recipe deploys st2 components as well as dependant
 # services which are mongodb, rabbitmq and postgressql(used by mistral).
-#
 
 pubkey = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kFg0ZNmdrSqFvP+kZbVDlOdxzKgkcg3tKT19JTAKljpQCqUcZAEIthp8KsesXmAErZ8ykOEuYRCjug4Wd9uyXeewg5SgJy2gz/0biCAToJ71XxrPMM5SgVk/0sWxRIbmkU7+gNga6OIcimNxH5flESRAQx+C1kD1sBMfPeJzMa48kZWKBpaScguWka1N1rVn7nDza7srqPn+7NmQDVF/+VkMOxCEJcbIXdc0hYzebatWklYIcoSuF0WETYJxmKCoL8stTFucCxDXzbPvwGL5WctdZKcu7MeAaodH8V3x7aCujXzsSILtU7mc7uewuM2iT3nukLqYOk6W4UFRBk8n'
 prikey = %(-----BEGIN RSA PRIVATE KEY-----
@@ -39,13 +38,12 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 -----END RSA PRIVATE KEY-----
 )
 
-node.override['stackstorm']['roles'] = %w(controller worker client)
 node.default['stackstorm']['user']['ssh_pub'] = pubkey
 node.default['stackstorm']['user']['ssh_key'] = prikey
 node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
 
-include_recipe 'stackstorm::_packages'
 include_recipe 'mongodb3::default'
 include_recipe 'rabbitmq::default'
+include_recipe 'stackstorm::_packages'
 include_recipe 'stackstorm::default'
 include_recipe 'stackstorm::mistral'
