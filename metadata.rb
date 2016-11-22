@@ -7,8 +7,8 @@ long_description 'Installs/Configures stackstorm'
 version '0.4.0'
 
 supports 'ubuntu', '= 14.04'
-supports 'redhat', '~> 7.1'
-supports 'centos', '~> 7.1'
+supports 'redhat', '~> 7.0'
+supports 'centos', '~> 7.0'
 supports 'amazon'
 
 depends 'sudo'
