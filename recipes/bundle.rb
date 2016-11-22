@@ -44,6 +44,5 @@ node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
 
 include_recipe 'mongodb3::default'
 include_recipe 'rabbitmq::default'
-include_recipe 'stackstorm::_packages'
 include_recipe 'stackstorm::default'
 include_recipe 'stackstorm::mistral'
