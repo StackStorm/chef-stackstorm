@@ -71,4 +71,4 @@ You might be interested in other methods to deploy StackStorm engine:
 * Manual Instructions
   * [Ubuntu](https://docs.stackstorm.com/install/deb.html)
   * [RHEL7/CentOS7](https://docs.stackstorm.com/install/rhel7.html)
-  * [RHEL6/CentOS7](https://docs.stackstorm.com/install/rhel6.html)
+  * [RHEL6/CentOS6](https://docs.stackstorm.com/install/rhel6.html)
