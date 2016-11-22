@@ -1,50 +1,74 @@
-# StackStorm chef cookbook
-
+# StackStorm Chef Cookbook
 [![Build Status](https://travis-ci.org/StackStorm/chef-stackstorm.svg)](https://travis-ci.org/StackStorm/chef-stackstorm)
 [![Chef cookbook at Supermarket](https://img.shields.io/cookbook/v/stackstorm.svg?maxAge=2592000)](https://supermarket.chef.io/cookbooks/stackstorm)
 [![Join our community Slack](https://stackstorm-community.herokuapp.com/badge.svg)](https://stackstorm.typeform.com/to/K76GRP)
 
-Cookbook for [StackStorm](https://stackstorm.com/) Automation as a Service. This cookbook is used to install and bring up **st2** components using Chef.
+Cookbook to install and configure [StackStorm](https://github.com/stackstorm/st2) components using Chef.
+
+> [StackStorm](http://stackstorm.com/) is event-driven automation platform written in Python.
+With over [100+ integrations](https://github.com/StackStorm/st2contrib/tree/master/packs) like GitHub, Docker, Nagios, NewRelic, AWS, Chef, Slack it allows you to wire together existing infrastructure into complex Workflows with auto-remediation and many more.
+Aka IFTTT orchestration for Ops.
 
 ## Supported Platforms
 * Ubuntu 14.04 LTS
-* CentOS 7.2
+* RHEL7 / CentOS7
+
+## Requirements
+Minimum 2GB of memory and 3.5GB of disk space is required, since StackStorm is shipped with RabbitMQ, PostgreSQL, Mongo and [OpenStack Mistral](https://github.com/stackstorm/chef-openstack-mistral) workflow engine. See [System Requirements](https://docs.stackstorm.com/install/system_requirements.html) for production use.
+
+## Quick Start
+For those who want to play with StackStorm, a recipe already exists to get you setup and going with minimal effort:
+```rb
+recipe[stackstorm::bundle]
+```
+
+## Recipes
+
+### `stackstorm:default`
+Installs and configures `st2`.
+Mind that the valid `config` options must be provided such as `RabbitMQ` and `MongoDB` endpoints.
+ Otherwise StackStorm services fail when trying to establish connections.
+
+### `stackstorm::bundle`
+All-in-one solution which installs and configures `st2` system services as well as all required dependencies such as `RabbitMQ`, `MongoDB` and [`st2mistral`](https://github.com/StackStorm/chef-openstack-mistral).
 
 ## Attributes
-__NOTE__: By default, latest stable version of `st2` and `st2mistral` will be installed from [PackageCloud Repository](https://packagecloud.io/stackstorm/stable).
-
 ### Common attributes
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
-| `['stackstorm']['config']` | Hash | Various configuration options used to build up the `st2.conf` configuration file. | *see attributes file* |
+| `['stackstorm']['config']` | Hash | Various options used to build up the `st2.conf` configuration file. | *see [config.rb](attributes/config.rb)* |
 
-There are different attributes providing options values which are substituted into **st2.conf** file. For more details have look at the [config.rb](attributes/config.rb).
+### System User
+To run local and remote shell actions, StackStorm uses a special _system user_ (default `stanley`). For remote Linux actions, SSH is used. It is advised to configure SSH key-based authentication on all remote hosts.
 
-### User management
 | Key | Type | Description | Default |
 | --- | --- | --- | --- |
 | `['stackstorm']['user']['user']` | String | System user used by stackstorm stack. | `'stanley'` |
 | `['stackstorm']['user']['group']` | String | System group used by stackstorm stack. | `'stanley'` |
 | `['stackstorm']['user']['home']` | String | Path to stanley's home directory. | `'/home/stanley'` |
-| `['stackstorm']['user']['authorized_keys']` | Array | List of ssh public keys added to stanley's* ~/.ssh/authorized_keys* file. | `[]` |
+| `['stackstorm']['user']['authorized_keys']` | Array | List of ssh public keys added to stanley's `~/.ssh/authorized_keys` file. | `[]` |
 | `['stackstorm']['user']['ssh_key']` | String | Stanley's ssh private key. | `nil` |
 | `['stackstorm']['user']['ssh_pub']` | String | Stanley's ssh public key. | `nil` |
 | `['stackstorm']['user']['ssh_key_bits']` | Integer | Specifies the number of bits for ssh key creation. | `2048` |
 | `['stackstorm']['user']['enable_sudo']` | Boolean | Enables sudo privileges for stanley. | `true` |
 
-StackStorm uses **system_user** option to specify privileges used to execute local or remote actions. This user is managed and configured by this cookbook. **Stanley** user is different from **run_user** whose privileges used for running **all St2** services (except *action runners*). Action runners are started with **root** privileges and StackStorm drops them to *stanley's* privileges during action execution. If **root** privileges for running actions are required *stanley* must be valid sudoer.
+Stanley's ssh key is automatically generated if no `ssh_key` is provided. If `root` privileges for running actions are required `stanley` must be a valid sudoer. This is the default behavior.
 
-Stanley's ssh key is automatically generated if no **ssh_key** is provided. This is the default behavior.
-
-## stackstorm:default
-**Mind that the valid configuration must be provided such as RabbitMQ and MongoDB endpoints**. Otherwise StackStorm services fail when trying to establish connections.
-
-### stackstorm::bundle
-For those who wants to play with StackStorm there's an *all-in-one* solution which installs and configures StackStorm system services as well as all required components such as *RabbitMQ, MongoDB and [Mistral](https://github.com/StackStorm/chef-openstack-mistral)* . To install pre-configured *StackStorm bundle* just include the `"recipe[stackstorm::bundle]"` into your run list.
-
-## License and Authors
+## Authors
 * Author:: StackStorm (st2-dev) (<info@stackstorm.com>)
-* Author:: Denis Baryshev (<dennybaa@gmail.com>)
+* Author:: [Eugen C.](https://github.com/armab/) (<armab@stackstorm.com>)
+* Author:: [Denis Baryshev](https://github.com/armab/) (<dennybaa@gmail.com>)
+* Contributor:: [Bao Nguyen](https://github.com/sysbot) (<ngqbao@gmail.com>)
+* Contributor:: [Grant Ridder](https://github.com/shortdudey123)
+* Contributor:: [Javier Palomo Almena](https://github.com/jvrplmlmn)
 
-## Contributors
-* Bao Nguyen (<ngqbao@gmail.com>)
+## Other Installers
+You might be interested in other methods to deploy StackStorm engine: 
+* Configuration Management
+  * [Ansible Playbooks](https://github.com/stackstorm/ansible-st2)
+  * [Puppet Module](https://github.com/stackstorm/puppet-st2)
+
+* Manual Instructions
+  * [Ubuntu](https://docs.stackstorm.com/install/deb.html)
+  * [RHEL7/CentOS7](https://docs.stackstorm.com/install/rhel7.html)
+  * [RHEL6/CentOS7](https://docs.stackstorm.com/install/rhel6.html)
