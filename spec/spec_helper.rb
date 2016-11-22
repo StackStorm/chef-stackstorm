@@ -30,7 +30,8 @@ end
 RSpec.configure do |config|
   config.include StackstormCookbook::SpecHelper
 
-  config.log_level = :fatal
+  # Avoid deprecation notice SPAM
+  config.log_level = :error
   config.formatter = :documentation
   config.platform = 'ubuntu'
   config.version = '14.04'
