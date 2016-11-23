@@ -28,7 +28,11 @@ module StackstormCookbook
 end
 
 RSpec.configure do |config|
-  config.platform = 'redhat'
-  config.version = '7.1'
   config.include StackstormCookbook::SpecHelper
+
+  # Avoid deprecation notice SPAM
+  config.log_level = :error
+  config.formatter = :documentation
+  config.platform = 'ubuntu'
+  config.version = '14.04'
 end

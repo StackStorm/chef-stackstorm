@@ -41,16 +41,6 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 )
     end
 
-    it 'should override "node[\'stackstorm\'][\'roles\']"' do
-      expect(chef_run.node['stackstorm']['roles']).to eq(
-        %w(
-          controller
-          worker
-          client
-        )
-      )
-    end
-
     it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_pub\']"' do
       expect(chef_run.node['stackstorm']['user']['ssh_pub']).to eq(pubkey)
     end
@@ -75,33 +65,23 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
     #   expect(chef_run.node['rabbitmq']['pin_distro_version']).to eq(false)
     # end
 
-    it 'should include recipe stackstorm::_initial' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::_initial')
-      chef_run
-    end
-
-    it 'should include recipe stackstorm::_packages' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::_packages')
-      chef_run
-    end
-
     it 'should include recipe mongodb3::default' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
       chef_run
     end
 
     it 'should include recipe rabbitmq::default' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq::default')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq::default')
       chef_run
     end
 
     it 'should include recipe stackstorm::default' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::default')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::default')
       chef_run
     end
 
     it 'should include recipe stackstorm::mistral' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::mistral')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::mistral')
       chef_run
     end
   end

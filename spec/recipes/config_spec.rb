@@ -8,6 +8,14 @@ describe 'stackstorm::config' do
   context 'with default node attributes' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
+    it 'should create /etc/st2 directory with attributes' do
+      expect(chef_run).to create_directory('/etc/st2').with(
+        user: 'root',
+        group: 'root',
+        mode: '0755'
+      )
+    end
+
     let(:st2_conf) do
       %(# System-wide configuration
 
@@ -95,7 +103,7 @@ db_name = st2
     end
 
     it 'should include recipe stackstorm::user' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::user')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::user')
       chef_run
     end
 
@@ -172,15 +180,6 @@ db_name = st2
           'db_username' => nil,
           'db_password' => nil
         }
-      )
-    end
-
-    it 'should create directory "st2:log_dir"' do
-      expect(chef_run).to create_directory('st2:log_dir').with(
-        path: '/var/log/st2',
-        owner: 'st2',
-        group: 'st2',
-        mode: '0755'
       )
     end
   end

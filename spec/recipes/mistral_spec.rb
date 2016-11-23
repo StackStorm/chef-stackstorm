@@ -9,17 +9,17 @@ describe 'stackstorm::mistral' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
     it 'should include recipe openstack-mistral' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral')
       chef_run
     end
 
     it 'should include recipe rabbitmq' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq::default')
       chef_run
     end
 
     it 'should include recipe openstack-mistral::_database' do
-      allow_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral::_database')
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('openstack-mistral::_database')
       chef_run
     end
 

@@ -7,9 +7,7 @@ describe 'stackstorm::user' do
     it 'should create user "stanley"' do
       expect(chef_run).to create_user('stanley').with(
         home: '/home/stanley',
-        supports: {
-          manage_home: true
-        }
+        manage_home: true
       )
     end
 
