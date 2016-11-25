@@ -13,6 +13,7 @@ conf = node['stackstorm']['user']
 
 user conf['user'] do
   home conf.home
+  group conf.group
   manage_home true
   action :create
 end
