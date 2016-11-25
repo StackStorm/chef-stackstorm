@@ -7,6 +7,9 @@ driver:
   privileged: true
   use_sudo: false
 
+verifier:
+  name: inspec
+
 platforms:
 - name: ubuntu-14.04
   driver:
