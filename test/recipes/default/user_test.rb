@@ -65,7 +65,5 @@ end
 
 describe file('/etc/sudoers.d/stanley') do
   it { should exist }
-  its('content') { should match(%r{#\s.*?This\s.*?file\s.*?is\s.*?managed\s.*?by\s.*?Chef.}) }
-  its('content') { should match(%r{#\s.*?Do\s.*?NOT\s.*?modify\s.*?this\s.*?file\s.*?directly.}) }
   its('content') { should match(%r{stanley\s.*?ALL\=\(ALL\)\s.*?NOPASSWD:ALL}) }
 end
