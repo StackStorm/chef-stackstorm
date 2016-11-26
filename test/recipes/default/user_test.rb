@@ -10,7 +10,6 @@ end
 
 describe passwd.users(/stanley/) do
   its('homes') { should eq ['/home/stanley'] }
-  its('shells') { should eq ['/bin/bash'] }
 end
 
 describe directory('/home/stanley/.ssh') do
