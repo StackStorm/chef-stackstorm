@@ -8,6 +8,9 @@ driver:
 provisioner:
   name: chef_zero
 
+verifier:
+  name: inspec
+
 platforms:
   - name: ubuntu-14.04
   - name: centos-7.2
