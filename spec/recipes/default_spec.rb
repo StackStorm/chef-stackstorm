@@ -22,5 +22,13 @@ describe 'stackstorm::default' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::_services')
       chef_run
     end
+
+    it 'should generate htpasswd file with auth credentials' do
+      expect(chef_run).to add_htpasswd(':add credentials to htpasswd file').with(
+        file: '/etc/st2/htpasswd',
+        user: 'st2admin',
+        password: 'Ch@ngeMe'
+      )
+    end
   end
 end
