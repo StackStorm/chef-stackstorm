@@ -21,6 +21,7 @@ depends 'apt'
 depends 'yum'
 depends 'yum-epel'
 depends 'packagecloud'
+depends 'htpasswd'
 
 source_url 'https://github.com/StackStorm/chef-stackstorm' if respond_to?(:source_url)
 issues_url 'https://github.com/StackStorm/chef-stackstorm/issues' if respond_to?(:issues_url)

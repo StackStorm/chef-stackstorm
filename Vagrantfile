@@ -19,9 +19,6 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = 'chef-stackstorm'
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  # Set the version of chef to install using the vagrant-omnibus plugin
-  config.omnibus.chef_version = 'latest'
-
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
@@ -42,6 +39,18 @@ Vagrant.configure(2) do |config|
     # Required for StackStorm to run properly
     vb.memory = 2048
   end
+
+  if Vagrant.has_plugin?('vagrant-hostmanager')
+    config.hostmanager.enabled = false
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+    config.hostmanager.aliases = ['www.chef-stackstorm']
+    config.vm.provision :hostmanager
+  end
+
+  # Set the version of chef to install using the vagrant-omnibus plugin
+  config.omnibus.chef_version = 'latest'
 
   # An array of symbols representing groups of cookbook described in the Vagrantfile
   # to exclusively install and copy to Vagrant's shelf.

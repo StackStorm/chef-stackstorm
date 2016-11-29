@@ -37,15 +37,17 @@ All-in-one solution which installs and configures `st2` system services as well 
 | Key | Type | Description | Default |
 | --- | --- | :--- | --- |
 | `['stackstorm']['config']` | Hash | Various options used to build up the `st2.conf` configuration file. | *see [config.rb](attributes/config.rb)* |
+| `['stackstorm']['username']` | String | StackStorm username for simple `htpasswd`-based [authentication](https://docs.stackstorm.com/install/deb.html?highlight=flat_file#configure-authentication). | `st2admin` |
+| `['stackstorm']['password']` | String | StackStorm password. | `Ch@ngeMe` |
 
 ### System User
 To run local and remote shell actions, StackStorm uses a special _system user_ (default `stanley`). For remote Linux actions, SSH is used. It is advised to configure SSH key-based authentication on all remote hosts.
 
 | Key | Type | Description | Default |
 | --- | --- | --- | --- |
-| `['stackstorm']['user']['user']` | String | System user used by stackstorm stack. | `'stanley'` |
-| `['stackstorm']['user']['group']` | String | System group used by stackstorm stack. | `'stanley'` |
-| `['stackstorm']['user']['home']` | String | Path to stanley's home directory. | `'/home/stanley'` |
+| `['stackstorm']['user']['user']` | String | System user used by stackstorm stack. | `stanley` |
+| `['stackstorm']['user']['group']` | String | System group used by stackstorm stack. | `stanley` |
+| `['stackstorm']['user']['home']` | String | Path to stanley's home directory. | `/home/stanley` |
 | `['stackstorm']['user']['authorized_keys']` | Array | List of ssh public keys added to stanley's `~/.ssh/authorized_keys` file. | `[]` |
 | `['stackstorm']['user']['ssh_key']` | String | Stanley's ssh private key. | `nil` |
 | `['stackstorm']['user']['ssh_pub']` | String | Stanley's ssh public key. | `nil` |
