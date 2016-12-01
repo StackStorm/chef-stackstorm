@@ -30,7 +30,7 @@ Mind that the valid `config` options must be provided such as `RabbitMQ` and `Mo
  Otherwise StackStorm services fail when trying to establish connections.
 
 ### `stackstorm::bundle`
-All-in-one solution which installs and configures `st2` system services as well as all required dependencies such as `RabbitMQ`, `MongoDB` and [`st2mistral`](https://github.com/StackStorm/chef-openstack-mistral).
+All-in-one solution which installs and configures `st2` system services as well as all required dependencies such as `RabbitMQ`, `MongoDB`, [`st2mistral`](https://github.com/StackStorm/chef-openstack-mistral), `Nginx` and [`st2web`](https://github.com/StackStorm/st2web).
 
 ## Attributes
 ### Common attributes
@@ -65,7 +65,7 @@ Stanley's ssh key is automatically generated if no `ssh_key` is provided. If `ro
 * Contributor:: [Javier Palomo Almena](https://github.com/jvrplmlmn)
 
 ## Other Installers
-You might be interested in other methods to deploy StackStorm engine: 
+You might be interested in other methods to deploy StackStorm engine:
 * Configuration Management
   * [Ansible Playbooks](https://github.com/stackstorm/ansible-st2)
   * [Puppet Module](https://github.com/stackstorm/puppet-st2)
