@@ -8,3 +8,17 @@
 describe package 'st2' do
   it { should be_installed }
 end
+
+if os[:family] == 'debian'
+  describe file '/etc/apt/sources.list.d/StackStorm_stable.list' do
+    it { should exist }
+  end
+elsif os[:family] == 'redhat'
+  describe file '/etc/yum.repos.d/StackStorm_stable.repo' do
+    it { should exist }
+  end
+  describe yum.repo 'StackStorm_stable' do
+    it { should exist }
+    it { should be_enabled }
+  end
+end
