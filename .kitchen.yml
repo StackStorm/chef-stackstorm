@@ -20,3 +20,7 @@ suites:
     run_list:
       - "recipe[stackstorm::bundle]"
     attributes:
+      stackstorm:
+        ssl:
+          self_signed:
+            enabled: true
