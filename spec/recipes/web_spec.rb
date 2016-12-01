@@ -39,10 +39,10 @@ describe 'stackstorm::web' do
     end
   end
 
-  context "with node['stackstorm']['ssl']['self_signed']['enabled'] = true" do
+  context "with node['stackstorm']['web']['ssl']['self_signed']['enabled'] = true" do
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
-        node.normal['stackstorm']['ssl']['self_signed']['enabled'] = true
+        node.normal['stackstorm']['web']['ssl']['self_signed']['enabled'] = true
       end.converge(described_recipe)
     end
 

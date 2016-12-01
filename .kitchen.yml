@@ -21,6 +21,7 @@ suites:
       - "recipe[stackstorm::bundle]"
     attributes:
       stackstorm:
-        ssl:
-          self_signed:
-            enabled: true
+        web:
+          ssl:
+            self_signed:
+              enabled: true
