@@ -16,7 +16,7 @@ Metrics/LineLength:
   Max: 200
   Exclude:
     - recipes/bundle.rb
-    - spec/recipes/bundle_spec.rb
+    - test/unit/spec/recipes/bundle_spec.rb
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 30 lines of code.'
@@ -47,10 +47,3 @@ Style/RegexpLiteral:
   Description: 'Use / or %r around regular expressions.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-r'
   Enabled: false
-
-Style/RescueModifier:
-  Description: 'Avoid using rescue in its modifier form.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-rescue-modifiers'
-  Enabled: true
-  Exclude:
-    - libraries/st2_install_helpers.rb

@@ -35,7 +35,9 @@ begin
   require 'rspec/core/rake_task'
 
   desc 'Run ChefSpec examples'
-  RSpec::Core::RakeTask.new(:spec)
+  RSpec::Core::RakeTask.new(:spec) do |t, _args|
+    t.rspec_opts = 'test/unit'
+  end
 rescue LoadError => e
   puts ">>> Gem load error: #{e}, omitting spec" unless ENV['CI']
 end
