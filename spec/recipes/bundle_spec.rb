@@ -5,13 +5,13 @@ describe 'stackstorm::bundle' do
     global_stubs_include_recipe
   end
 
-  context 'with default node attributes' do
-    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  let(:chef_run_ubuntu_1404) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
+  let(:chef_run_centos_7) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0').converge(described_recipe) }
 
-    let(:pubkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kFg0ZNmdrSqFvP+kZbVDlOdxzKgkcg3tKT19JTAKljpQCqUcZAEIthp8KsesXmAErZ8ykOEuYRCjug4Wd9uyXeewg5SgJy2gz/0biCAToJ71XxrPMM5SgVk/0sWxRIbmkU7+gNga6OIcimNxH5flESRAQx+C1kD1sBMfPeJzMa48kZWKBpaScguWka1N1rVn7nDza7srqPn+7NmQDVF/+VkMOxCEJcbIXdc0hYzebatWklYIcoSuF0WETYJxmKCoL8stTFucCxDXzbPvwGL5WctdZKcu7MeAaodH8V3x7aCujXzsSILtU7mc7uewuM2iT3nukLqYOk6W4UFRBk8n' }
+  let(:pubkey) { 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kFg0ZNmdrSqFvP+kZbVDlOdxzKgkcg3tKT19JTAKljpQCqUcZAEIthp8KsesXmAErZ8ykOEuYRCjug4Wd9uyXeewg5SgJy2gz/0biCAToJ71XxrPMM5SgVk/0sWxRIbmkU7+gNga6OIcimNxH5flESRAQx+C1kD1sBMfPeJzMa48kZWKBpaScguWka1N1rVn7nDza7srqPn+7NmQDVF/+VkMOxCEJcbIXdc0hYzebatWklYIcoSuF0WETYJxmKCoL8stTFucCxDXzbPvwGL5WctdZKcu7MeAaodH8V3x7aCujXzsSILtU7mc7uewuM2iT3nukLqYOk6W4UFRBk8n' }
 
-    let(:prikey) do
-      %(-----BEGIN RSA PRIVATE KEY-----
+  let(:prikey) do
+    %(-----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAuJBYNGTZna0qhbz/pGW1Q5TnccyoJHIN7Sk9fSUwCpY6UAql
 HGQBCLYafCrHrF5gBK2fMpDhLmEQo7oOFnfbsl3nsIOUoCctoM/9G4ggE6Ce9V8a
 zzDOUoFZP9LFsUSG5pFO/oDYGujiHIpjcR+X5REkQEMfgtZA9bATHz3iczGuPJGV
@@ -39,55 +39,83 @@ dLgUSO+U5qhTh3TCm1bB+GmCSOCYK7RCet6Q1KOgro/ssFJN3L1a8R6z1EcPLJ3k
 q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 -----END RSA PRIVATE KEY-----
 )
-    end
+  end
 
+  context 'using ubuntu 14.04 with default node attributes' do
     it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_pub\']"' do
-      expect(chef_run.node['stackstorm']['user']['ssh_pub']).to eq(pubkey)
+      expect(chef_run_ubuntu_1404.node['stackstorm']['user']['ssh_pub']).to eq(pubkey)
     end
 
     it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_key\']"' do
-      expect(chef_run.node['stackstorm']['user']['ssh_key']).to eq(prikey)
+      expect(chef_run_ubuntu_1404.node['stackstorm']['user']['ssh_key']).to eq(prikey)
     end
 
     it 'should override "node[\'stackstorm\'][\'user\'][\'authorized_keys\']"' do
-      expect(chef_run.node['stackstorm']['user']['authorized_keys']).to eq([pubkey])
+      expect(chef_run_ubuntu_1404.node['stackstorm']['user']['authorized_keys']).to eq([pubkey])
     end
-
-    # it 'should override "node[\'yum\'][\'epel\'][\'enabled\']"' do
-    #   expect(chef_run.node['yum']['epel']['enabled']).to eq(false)
-    # end
-
-    # it 'should override "node[\'rabbitmq\'][\'use_distro_version\']"' do
-    #   expect(chef_run.node['rabbitmq']['use_distro_version']).to eq(true)
-    # end
-
-    # it 'should override "node[\'rabbitmq\'][\'pin_distro_version\']"' do
-    #   expect(chef_run.node['rabbitmq']['pin_distro_version']).to eq(false)
-    # end
 
     it 'should include recipe mongodb3::default' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
-      chef_run
+      chef_run_ubuntu_1404
     end
 
     it 'should include recipe rabbitmq::default' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq::default')
-      chef_run
+      chef_run_ubuntu_1404
     end
 
     it 'should include recipe stackstorm::default' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::default')
-      chef_run
+      chef_run_ubuntu_1404
     end
 
     it 'should include recipe stackstorm::mistral' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::mistral')
-      chef_run
+      chef_run_ubuntu_1404
     end
 
     it 'should include recipe stackstorm::web' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::web')
-      chef_run
+      chef_run_centos_7
+    end
+  end
+
+  context 'using centos 7 with default node attributes' do
+    it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_pub\']"' do
+      expect(chef_run_centos_7.node['stackstorm']['user']['ssh_pub']).to eq(pubkey)
+    end
+
+    it 'should override "node[\'stackstorm\'][\'user\'][\'ssh_key\']"' do
+      expect(chef_run_centos_7.node['stackstorm']['user']['ssh_key']).to eq(prikey)
+    end
+
+    it 'should override "node[\'stackstorm\'][\'user\'][\'authorized_keys\']"' do
+      expect(chef_run_centos_7.node['stackstorm']['user']['authorized_keys']).to eq([pubkey])
+    end
+
+    it 'should include recipe mongodb3::default' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
+      chef_run_centos_7
+    end
+
+    it 'should include recipe rabbitmq::default' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('rabbitmq::default')
+      chef_run_centos_7
+    end
+
+    it 'should include recipe stackstorm::default' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::default')
+      chef_run_centos_7
+    end
+
+    it 'should include recipe stackstorm::mistral' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::mistral')
+      chef_run_centos_7
+    end
+
+    it 'should include recipe stackstorm::web' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::web')
+      chef_run_centos_7
     end
   end
 end
