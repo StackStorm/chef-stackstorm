@@ -5,19 +5,11 @@ describe 'stackstorm::config' do
     global_stubs_include_recipe
   end
 
-  context 'with default node attributes' do
-    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  let(:chef_run_ubuntu_1404) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
+  let(:chef_run_centos_7) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0').converge(described_recipe) }
 
-    it 'should create /etc/st2 directory with attributes' do
-      expect(chef_run).to create_directory('/etc/st2').with(
-        user: 'root',
-        group: 'root',
-        mode: '0755'
-      )
-    end
-
-    let(:st2_conf) do
-      %(# System-wide configuration
+  let(:st2_conf) do
+    %(# System-wide configuration
 
 [api]
 # Host and port to bind the API server.
@@ -100,17 +92,26 @@ host = 127.0.0.1
 port = 27017
 db_name = st2
 )
+  end
+
+  context 'using ubuntu 14.04 with default node attributes' do
+    it 'should create /etc/st2 directory with attributes' do
+      expect(chef_run_ubuntu_1404).to create_directory('/etc/st2').with(
+        user: 'root',
+        group: 'root',
+        mode: '0755'
+      )
     end
 
     it 'should include recipe stackstorm::user' do
       expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::user')
-      chef_run
+      chef_run_ubuntu_1404
     end
 
     it 'should not create file ":backup StackStorm dist configuration" if st2.conf does not exist' do
       allow(File).to receive(:exist?).and_call_original
       allow(File).to receive(:exist?).with('/etc/st2/st2.conf').and_return(false)
-      expect(chef_run).to_not create_file(':backup StackStorm dist configuration').with(
+      expect(chef_run_ubuntu_1404).to_not create_file(':backup StackStorm dist configuration').with(
         path: '/etc/st2/st2.conf.dist'
       )
     end
@@ -118,7 +119,7 @@ db_name = st2
     it 'should not create file ":backup StackStorm dist configuration" if st2.conf.dist exists' do
       allow(File).to receive(:exist?).and_call_original
       allow(File).to receive(:exist?).with('/etc/st2/st2.conf.dist').and_return(true)
-      expect(chef_run).to_not create_file(':backup StackStorm dist configuration').with(
+      expect(chef_run_ubuntu_1404).to_not create_file(':backup StackStorm dist configuration').with(
         path: '/etc/st2/st2.conf.dist'
       )
     end
@@ -128,14 +129,105 @@ db_name = st2
       allow(File).to receive(:exist?).with('/etc/st2/st2.conf').and_return(true)
       allow(IO).to receive(:read).and_call_original
       allow(IO).to receive(:read).with('/etc/st2/st2.conf').and_return(st2_conf)
-      expect(chef_run).to create_file(':backup StackStorm dist configuration').with(
+      expect(chef_run_ubuntu_1404).to create_file(':backup StackStorm dist configuration').with(
         path: '/etc/st2/st2.conf.dist',
         content: st2_conf
       )
     end
 
     it 'should create template ":create StackStorm configuration"' do
-      expect(chef_run).to create_template(':create StackStorm configuration').with(
+      expect(chef_run_ubuntu_1404).to create_template(':create StackStorm configuration').with(
+        path: '/etc/st2/st2.conf',
+        owner: 'root',
+        group: 'root',
+        mode: 0644,
+        source: 'st2.conf.erb',
+        # Config options ordered as they appear in original `st2.conf`:
+        # https://github.com/StackStorm/st2/blob/master/conf/st2.package.conf
+        variables: {
+          'api_url' => 'http://127.0.0.1:9101',
+          'api_host' => '0.0.0.0',
+          'api_port' => 9101,
+          'api_mask_secrets' => true,
+          'api_allow_origin' => '*',
+
+          'auth_host' => '0.0.0.0',
+          'auth_port' => 9100,
+          'auth_use_ssl' => false,
+          'auth_debug' => false,
+          'auth_enable' => true,
+          'auth_standalone_file' => '/etc/st2/htpasswd',
+
+          'syslog_enabled' => false,
+          'syslog_host' => '127.0.0.1',
+          'syslog_port' => 514,
+          'syslog_facility' => 'local7',
+          'syslog_protocol' => 'udp',
+
+          'log_mask_secrets' => true,
+
+          'system_user' => 'stanley',
+          'ssh_key_file' => '/home/stanley/.ssh/id_rsa',
+
+          'rmq_host' => '127.0.0.1',
+          'rmq_vhost' => nil,
+          'rmq_username' => 'guest',
+          'rmq_password' => 'guest',
+          'rmq_port' => 5672,
+
+          'db_host' => '127.0.0.1',
+          'db_port' => 27017,
+          'db_name' => 'st2',
+          'db_username' => nil,
+          'db_password' => nil
+        }
+      )
+    end
+  end
+
+  context 'using centos 7 with default node attributes' do
+    it 'should create /etc/st2 directory with attributes' do
+      expect(chef_run_centos_7).to create_directory('/etc/st2').with(
+        user: 'root',
+        group: 'root',
+        mode: '0755'
+      )
+    end
+
+    it 'should include recipe stackstorm::user' do
+      expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::user')
+      chef_run_centos_7
+    end
+
+    it 'should not create file ":backup StackStorm dist configuration" if st2.conf does not exist' do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with('/etc/st2/st2.conf').and_return(false)
+      expect(chef_run_centos_7).to_not create_file(':backup StackStorm dist configuration').with(
+        path: '/etc/st2/st2.conf.dist'
+      )
+    end
+
+    it 'should not create file ":backup StackStorm dist configuration" if st2.conf.dist exists' do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with('/etc/st2/st2.conf.dist').and_return(true)
+      expect(chef_run_centos_7).to_not create_file(':backup StackStorm dist configuration').with(
+        path: '/etc/st2/st2.conf.dist'
+      )
+    end
+
+    it 'should create file ":backup StackStorm dist configuration" if conditions are met' do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with('/etc/st2/st2.conf').and_return(true)
+      allow(IO).to receive(:read).and_call_original
+      allow(IO).to receive(:read).with('/etc/st2/st2.conf').and_return(st2_conf)
+      expect(chef_run_centos_7).to create_file(':backup StackStorm dist configuration').with(
+        path: '/etc/st2/st2.conf.dist',
+        content: st2_conf
+      )
+    end
+
+    it 'should create template ":create StackStorm configuration"' do
+      expect(chef_run_centos_7).to create_template(':create StackStorm configuration').with(
         path: '/etc/st2/st2.conf',
         owner: 'root',
         group: 'root',
