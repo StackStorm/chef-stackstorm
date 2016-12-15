@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'stackstorm::_packages' do
+describe 'stackstorm::_repository' do
   before do
     global_stubs_include_recipe
   end
@@ -18,10 +18,6 @@ describe 'stackstorm::_packages' do
       expect(chef_run).to create_packagecloud_repo('StackStorm/stable').with(
         type: 'deb'
       )
-    end
-
-    it 'should install pacakge "st2"' do
-      expect(chef_run).to install_package('st2')
     end
 
     it 'should not install pacakge "apt"' do

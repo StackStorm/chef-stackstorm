@@ -1,3 +1,5 @@
+include_recipe 'stackstorm::_repository'
+
 package 'st2web'
 
 node.default['nginx']['default_site_enabled'] = false

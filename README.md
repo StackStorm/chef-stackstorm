@@ -32,6 +32,10 @@ Mind that the valid `config` options must be provided such as `RabbitMQ` and `Mo
 ### `stackstorm::bundle`
 All-in-one solution which installs and configures `st2` system services as well as all required dependencies such as `RabbitMQ`, `MongoDB`, [`st2mistral`](https://github.com/StackStorm/chef-openstack-mistral), `Nginx` and [`st2web`](https://github.com/StackStorm/st2web).
 
+### `stackstorm::web`
+Installs StackStorm Web UI control panel ([`st2web`](https://github.com/StackStorm/st2web)) and configures `nginx` as a proxy for StackStorm services.
+It will generate self-signed certificate by default, see [Install WebUI and setup SSL termination](https://docs.stackstorm.com/install/deb.html#install-webui-and-setup-ssl-termination).
+
 ## Attributes
 ### Common attributes
 | Key | Type | Description | Default |
@@ -53,8 +57,17 @@ To run local and remote shell actions, StackStorm uses a special _system user_ (
 | `['stackstorm']['user']['ssh_pub']` | String | Stanley's ssh public key. | `nil` |
 | `['stackstorm']['user']['ssh_key_bits']` | Integer | Specifies the number of bits for ssh key creation. | `2048` |
 | `['stackstorm']['user']['enable_sudo']` | Boolean | Enables sudo privileges for stanley. | `true` |
-
 Stanley's ssh key is automatically generated if no `ssh_key` is provided. If `root` privileges for running actions are required `stanley` must be a valid sudoer. This is the default behavior.
+
+### Web UI
+Settings for StackStorm Web UI `st2web` and `nginx`.
+
+| Key | Type | Description | Default |
+| --- | --- | --- | --- |
+| `['stackstorm']['web']['ssl']['self_signed']['enabled']` | Boolean | Enable self-signed certificate generation. | `true` |
+| `['stackstorm']['web']['ssl']['self_signed']['org']` | String | Self-signed certificate `O` field. | `StackStorm` |
+| `['stackstorm']['web']['ssl']['self_signed']['org_unit']` | String | Self-signed certificate `OU` field. | `Information Technology` |
+| `['stackstorm']['web']['ssl']['self_signed']['country']` | String | Self-signed certificate `C` field. | `US` |
 
 ## Authors
 * Author:: StackStorm (st2-dev) (<info@stackstorm.com>)

@@ -12,7 +12,7 @@ supports 'centos', '~> 7.0'
 supports 'amazon'
 
 depends 'apt'
-depends 'chef_nginx', '~> 4.0.1'
+depends 'chef_nginx', '~> 5.0.1'
 depends 'database'
 depends 'htpasswd'
 depends 'mongodb3', '~> 5.3.0'

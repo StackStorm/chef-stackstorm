@@ -1,11 +1,9 @@
 #
 # Cookbook Name:: stackstorm
-# Recipe:: install_repo
+# Recipe:: _repository
 #
 # Copyright (C) 2015 StackStorm (info@stackstorm.com)
 #
-
-# Fetches remote packages from StackStorm repository.
 
 include_recipe 'apt'
 
@@ -35,6 +33,3 @@ end
 packagecloud_repo 'StackStorm/stable' do
   type type
 end
-
-# Install packages
-node['stackstorm']['install_repo']['packages'].each { |p| package p }

@@ -32,9 +32,3 @@ suites:
   - name: default
     run_list:
       - "recipe[stackstorm::bundle]"
-    attributes:
-      stackstorm:
-        web:
-          ssl:
-            self_signed:
-              enabled: true
