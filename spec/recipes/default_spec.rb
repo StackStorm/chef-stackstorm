@@ -20,6 +20,10 @@ describe 'stackstorm::default' do
           chef_run
         end
 
+        it 'should install pacakge "st2"' do
+          expect(chef_run).to install_package('st2')
+        end
+
         it 'should include recipe stackstorm::config' do
           expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('stackstorm::config')
           chef_run
