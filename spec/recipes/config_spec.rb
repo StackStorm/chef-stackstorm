@@ -93,7 +93,7 @@ db_name = st2
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0']
+    'centos' => ['7.0'],
   }
 
   platforms.each do |platform, versions|
@@ -185,7 +185,7 @@ db_name = st2
               'db_port' => 27017,
               'db_name' => 'st2',
               'db_username' => nil,
-              'db_password' => nil
+              'db_password' => nil,
             }
           )
         end

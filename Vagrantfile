@@ -62,7 +62,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
-      'recipe[stackstorm::default]'
+      'recipe[stackstorm::default]',
     ]
   end
 end

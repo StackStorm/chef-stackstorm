@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'stackstorm::user' do
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0']
+    'centos' => ['7.0'],
   }
 
   platforms.each do |platform, versions|
