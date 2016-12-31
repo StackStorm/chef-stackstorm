@@ -33,6 +33,4 @@ RSpec.configure do |config|
   # Avoid deprecation notice SPAM
   config.log_level = :error
   config.formatter = :documentation
-  config.platform = 'ubuntu'
-  config.version = '14.04'
 end

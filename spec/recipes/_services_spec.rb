@@ -13,14 +13,22 @@ describe 'stackstorm::_services' do
     global_stubs_include_recipe
   end
 
-  context 'with default node attributes' do
-    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
-    let(:node) { chef_run.node }
+  platforms = {
+    'ubuntu' => ['14.04'],
+    'centos' => ['7.0'],
+  }
 
-    ST2_SERVICES.each do |service_name|
-      it "should enable and start service '#{service_name}'" do
-        expect(chef_run).to enable_service(service_name)
-        expect(chef_run).to start_service(service_name)
+  platforms.each do |platform, versions|
+    versions.each do |version|
+      context "Using #{platform} #{version} with default node attributes" do
+        let(:chef_run) { ChefSpec::SoloRunner.new(platform: platform, version: version).converge(described_recipe) }
+
+        ST2_SERVICES.each do |service_name|
+          it "should enable and start service '#{service_name}'" do
+            expect(chef_run).to enable_service(service_name)
+            expect(chef_run).to start_service(service_name)
+          end
+        end
       end
     end
   end
