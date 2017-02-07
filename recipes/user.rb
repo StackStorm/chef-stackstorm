@@ -11,6 +11,10 @@
 
 conf = node['stackstorm']['user']
 
+group conf['group'] do
+  action :create
+end
+
 user conf['user'] do
   home conf['home']
   group conf['group']
