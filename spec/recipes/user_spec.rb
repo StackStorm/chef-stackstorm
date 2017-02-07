@@ -11,6 +11,10 @@ describe 'stackstorm::user' do
       let(:chef_run) { ChefSpec::SoloRunner.new(platform: platform, version: version).converge(described_recipe) }
 
       context "Using #{platform} #{version} with default node attributes" do
+        it 'should create grpoup "stanley"' do
+          expect(chef_run).to create_group('stanley')
+        end
+
         it 'should create user "stanley"' do
           expect(chef_run).to create_user('stanley').with(
             home: '/home/stanley',
