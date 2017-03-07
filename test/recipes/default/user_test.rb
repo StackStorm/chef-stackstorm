@@ -1,3 +1,10 @@
+# # encoding: utf-8
+
+# Inspec test for recipe stackstorm::user
+
+# The Inspec reference, with examples and extensive documentation, can be
+# found at https://docs.chef.io/inspec_reference.html
+
 describe group('stanley') do
   it { should exist }
 end
