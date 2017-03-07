@@ -45,5 +45,15 @@ describe port(443) do
   it { should be_listening }
 end
 
+describe file('/etc/nginx/sites-enabled/default') do
+  it { should_not exist }
+end
+
+describe file('/etc/nginx/sites-enabled/st2.conf') do
+  it { should exist }
+  it { should be_symlink }
+  it { should be_linked_to '/etc/nginx/sites-available/st2.conf' }
+end
+
 # TODO: Test REST API endpoints, defined in nginx
 # Ex: http://stackoverflow.com/a/6326763/4533625
