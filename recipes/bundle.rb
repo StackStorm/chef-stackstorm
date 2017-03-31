@@ -41,6 +41,7 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 node.default['stackstorm']['user']['ssh_pub'] = pubkey
 node.default['stackstorm']['user']['ssh_key'] = prikey
 node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
+node.override['rabbitmq']['version'] = '3.6.1'
 
 include_recipe 'mongodb3::default'
 include_recipe 'rabbitmq::default'
