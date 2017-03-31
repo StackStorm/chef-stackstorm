@@ -6,6 +6,10 @@
 #
 
 node.override['rabbitmq']['version'] = '3.6.1'
+# workaround for 'derived attributes' to force override rabbitmq version
+# See: https://tickets.opscode.com/browse/CHEF-4234
+node.from_file(run_context.resolve_attribute('rabbitmq', 'default'))
+
 node.override['openstack-mistral']['etc_dir'] = '/etc/mistral'
 node.override['openstack-mistral']['db_initialize']['enabled'] = true
 node.override['openstack-mistral']['db_initialize']['password'] = 'ilikerandompasswords'

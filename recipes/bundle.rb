@@ -41,7 +41,11 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 node.default['stackstorm']['user']['ssh_pub'] = pubkey
 node.default['stackstorm']['user']['ssh_key'] = prikey
 node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
+
 node.override['rabbitmq']['version'] = '3.6.1'
+# workaround for 'derived attributes' to force override rabbitmq version
+# See: https://tickets.opscode.com/browse/CHEF-4234
+node.from_file(run_context.resolve_attribute('rabbitmq', 'default'))
 
 include_recipe 'mongodb3::default'
 include_recipe 'rabbitmq::default'
