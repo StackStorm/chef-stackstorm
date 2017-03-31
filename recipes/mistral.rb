@@ -5,7 +5,7 @@
 # Copyright (C) 2015 StackStorm (info@stackstorm.com)
 #
 
-node.override['rabbitmq']['version'] = '3.6.1'
+node.override['rabbitmq']['version'] = '3.6.6'
 # workaround for 'derived attributes' to force override rabbitmq version
 # See: https://tickets.opscode.com/browse/CHEF-4234
 node.from_file(run_context.resolve_attribute('rabbitmq', 'default'))
