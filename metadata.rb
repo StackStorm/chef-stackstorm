@@ -11,6 +11,8 @@ supports 'redhat', '~> 7.0'
 supports 'centos', '~> 7.0'
 supports 'amazon'
 
+chef_version '>= 12.4'
+
 depends 'apt'
 depends 'chef_nginx', '~> 5.0.1'
 depends 'database'
