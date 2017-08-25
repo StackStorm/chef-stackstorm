@@ -34,3 +34,11 @@ script:
   - /opt/chefdk/bin/foodcritic --version
   - /opt/chefdk/bin/kitchen --version
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/chef exec rake ${SUITE}
+
+notifications:
+  # Post build failures to '#chef' channel in 'stackstorm-community' Slack
+  slack:
+    secure: O+o2FvLubrlKelWc1uvtcpLZgyQIBOoRGepZH2eKeguinGiXqaic0GK5KUthFdJJtmn3uT+brGyug08wgmSQKa+VoFEPJwHCIYTL2ZnGoggtJcbv8FU0c2sa1DJ1gSH4Q8PGzuwKuW67ExfYQYPwciyJ3RjmoYoIouB1pbqwmgk=
+    on_pull_requests: false
+    on_success: change # default: always
+    on_failure: always # default: always
