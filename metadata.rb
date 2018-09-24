@@ -22,9 +22,7 @@ depends 'openssl', '~> 6.0.0'
 depends 'openstack-mistral', '>= 0.3.0'
 depends 'packagecloud'
 depends 'postgresql'
-# For newer RabbitMQ cookbook versions, service fails to start in Dockerized environment under EL7
-# See: https://github.com/StackStorm/chef-stackstorm/pull/62
-depends 'rabbitmq', '<= 4.10.0'
+depends 'rabbitmq'
 depends 'sudo'
 depends 'yum'
 depends 'yum-epel'
