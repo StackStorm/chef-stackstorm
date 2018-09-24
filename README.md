@@ -1,7 +1,7 @@
 # StackStorm Chef Cookbook
 [![Build Status](https://travis-ci.org/StackStorm/chef-stackstorm.svg)](https://travis-ci.org/StackStorm/chef-stackstorm)
 [![Chef cookbook at Supermarket](https://img.shields.io/cookbook/v/stackstorm.svg?maxAge=2592000)](https://supermarket.chef.io/cookbooks/stackstorm)
-[![Join our community Slack](https://stackstorm-community.herokuapp.com/badge.svg)](https://stackstorm.typeform.com/to/K76GRP)
+[![Join our community Slack](https://stackstorm-community.herokuapp.com/badge.svg)](https://stackstorm.com/community-signup)
 
 Cookbook to install and configure [StackStorm](https://github.com/stackstorm/st2) components using Chef.
 

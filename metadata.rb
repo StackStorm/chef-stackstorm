@@ -1,7 +1,7 @@
 name 'stackstorm'
 maintainer 'StackStorm (st2-dev)'
 maintainer_email 'info@stackstorm.com'
-license 'Apache 2.0'
+license 'Apache-2.0'
 description 'Installs/Configures stackstorm'
 long_description 'Installs/Configures stackstorm'
 version '0.4.0'
