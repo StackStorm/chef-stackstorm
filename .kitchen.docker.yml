@@ -18,15 +18,14 @@ platforms:
     disable_upstart: false
     run_command: /sbin/init
     provision_command:
-      - /usr/bin/apt-get update
-      - /usr/bin/apt-get install -y apt-transport-https net-tools initscripts
-- name: centos-7.2
+      - /usr/bin/apt-get update && /usr/bin/apt-get install -y apt-transport-https net-tools initscripts libpq5 libpq-dev
+- name: centos-7.5
   driver:
     image: centos:7
     platform: rhel
     run_command: /usr/lib/systemd/systemd
     provision_command:
-      - /bin/yum install -y initscripts net-tools wget logrotate
+      - /bin/yum install -y initscripts net-tools wget logrotate postgresql-libs
 
 suites:
   - name: default

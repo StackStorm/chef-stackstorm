@@ -20,7 +20,7 @@ env:
   matrix:
     - SUITE=default
     - SUITE=integration:kitchen:default-ubuntu-1404
-    - SUITE=integration:kitchen:default-centos-72
+    - SUITE=integration:kitchen:default-centos-75
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888

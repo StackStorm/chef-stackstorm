@@ -93,7 +93,7 @@ db_name = st2
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0'],
+    'centos' => ['7.5'],
   }
 
   platforms.each do |platform, versions|
