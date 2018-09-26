@@ -2,13 +2,6 @@
 sudo: required
 services: docker
 
-addons:
- apt:
-   sources:
-     - chef-stable-precise
-   packages:
-     - chefdk
-
 # Don't `bundle install`
 install: echo "skip bundle install"
 
