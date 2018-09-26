@@ -44,10 +44,10 @@ logging = /etc/st2/logging.exporter.conf
 logging = /etc/st2/logging.garbagecollector.conf
 
 [timersengine]
-logging = /etc/st2timersengine/logging.st2timersengine.conf
+logging = /etc/st2/logging.timersengine.conf
 
 [workflow_engine]
-logging = /etc/st2actions/logging.workflowengine.conf
+logging = /etc/st2/logging.workflowengine.conf
 
 [auth]
 host = 0.0.0.0
