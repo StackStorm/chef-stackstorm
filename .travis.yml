@@ -25,6 +25,9 @@ env:
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
   - sudo iptables -L DOCKER || sudo iptables -N DOCKER
+  # ChefDK no longer available via APT repo
+  - wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/14.04/chefdk_3.2.30-1_amd64.deb
+  - sudo dpkg -i chefdk_3.2.30-1_amd64.deb
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - /opt/chefdk/bin/chef gem install kitchen-docker
 
