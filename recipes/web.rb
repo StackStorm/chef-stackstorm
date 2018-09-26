@@ -18,7 +18,7 @@ openssl_x509 '/etc/ssl/st2/st2.crt' do
   org node['stackstorm']['web']['ssl']['self_signed']['org']
   org_unit node['stackstorm']['web']['ssl']['self_signed']['org_unit']
   country node['stackstorm']['web']['ssl']['self_signed']['country']
-  only_if { node['stackstorm']['web']['ssl']['self_signed']['enabled'] == True }
+  only_if { node['stackstorm']['web']['ssl']['self_signed']['enabled'] == true }
 end
 
 include_recipe 'chef_nginx::repo'

@@ -44,6 +44,7 @@ node.default['stackstorm']['user']['authorized_keys'] = [pubkey]
 node.default['mongodb']['package_version'] = '3.4.17'
 node.default['postgresql']['pg_gem']['version'] = '0.21.0'
 node.override['htpasswd']['install_method'] = 'ruby'
+node.override['rabbitmq']['use_distro_version'] = true
 
 include_recipe 'htpasswd::default'
 include_recipe 'sc-mongodb::default'
