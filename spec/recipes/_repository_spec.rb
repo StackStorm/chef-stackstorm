@@ -10,7 +10,7 @@ describe 'stackstorm::_repository' do
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.5'],
+    'centos' => ['7.5.1804'],
   }
 
   platforms.each do |platform, versions|
