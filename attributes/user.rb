@@ -6,4 +6,4 @@ default['stackstorm']['user']['authorized_keys'] = []
 default['stackstorm']['user']['ssh_key'] = nil
 default['stackstorm']['user']['ssh_pub'] = nil
 default['stackstorm']['user']['ssh_key_bits'] = 2048
-default['stackstorm']['user']['enable_sudo'] = true
+default['stackstorm']['user']['enable_sudo'] = True

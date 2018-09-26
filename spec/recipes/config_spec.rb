@@ -13,7 +13,7 @@ describe 'stackstorm::config' do
 host = 0.0.0.0
 port = 9101
 logging = /etc/st2/logging.api.conf
-mask_secrets = true
+mask_secrets = True
 # allow_origin is required for handling CORS in st2 web UI.
 # allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
 allow_origin = *
@@ -42,6 +42,12 @@ logging = /etc/st2/logging.exporter.conf
 
 [garbagecollector]
 logging = /etc/st2/logging.garbagecollector.conf
+
+[timersengine]
+logging = /etc/st2timersengine/logging.st2timersengine.conf
+
+[workflow_engine]
+logging = /etc/st2actions/logging.workflowengine.conf
 
 [auth]
 host = 0.0.0.0
@@ -154,23 +160,23 @@ db_name = st2
               'api_url' => 'http://127.0.0.1:9101',
               'api_host' => '0.0.0.0',
               'api_port' => 9101,
-              'api_mask_secrets' => true,
+              'api_mask_secrets' => True,
               'api_allow_origin' => '*',
 
               'auth_host' => '0.0.0.0',
               'auth_port' => 9100,
-              'auth_use_ssl' => false,
-              'auth_debug' => false,
-              'auth_enable' => true,
+              'auth_use_ssl' => False,
+              'auth_debug' => False,
+              'auth_enable' => True,
               'auth_standalone_file' => '/etc/st2/htpasswd',
 
-              'syslog_enabled' => false,
+              'syslog_enabled' => False,
               'syslog_host' => '127.0.0.1',
               'syslog_port' => 514,
               'syslog_facility' => 'local7',
               'syslog_protocol' => 'udp',
 
-              'log_mask_secrets' => true,
+              'log_mask_secrets' => True,
 
               'system_user' => 'stanley',
               'ssh_key_file' => '/home/stanley/.ssh/id_rsa',
