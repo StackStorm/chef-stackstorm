@@ -6,7 +6,7 @@ describe 'stackstorm::_repository' do
   end
 
   let(:chef_run_ubuntu_1404) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
-  let(:chef_run_centos_7) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.5').converge(described_recipe) }
+  let(:chef_run_centos_7) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.5.1804').converge(described_recipe) }
 
   platforms = {
     'ubuntu' => ['14.04'],
