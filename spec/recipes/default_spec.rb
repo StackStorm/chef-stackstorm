@@ -20,7 +20,7 @@ describe 'stackstorm::default' do
           chef_run
         end
 
-        it 'should install pacakge "st2"' do
+        it 'should install package "st2"' do
           expect(chef_run).to install_package('st2')
         end
 
