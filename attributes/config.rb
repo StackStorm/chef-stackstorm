@@ -5,12 +5,12 @@ include_attribute 'stackstorm::user'
 # https://github.com/StackStorm/st2/blob/master/conf/st2.package.conf
 default['stackstorm']['config'] = {
   api_url: 'http://127.0.0.1:9101',
-  api_host: '0.0.0.0',
+  api_host: '127.0.0.1',
   api_port: 9101,
   api_mask_secrets: true,
   api_allow_origin: '*',
 
-  auth_host: '0.0.0.0',
+  auth_host: '127.0.0.1',
   auth_port: 9100,
   auth_use_ssl: false,
   auth_debug: false,
@@ -26,7 +26,7 @@ default['stackstorm']['config'] = {
   log_mask_secrets: true,
 
   system_user: node['stackstorm']['user']['user'],
-  ssh_key_file: "#{node['stackstorm']['user']['home']}/.ssh/id_rsa",
+  ssh_key_file: "#{node['stackstorm']['user']['home']}/.ssh/stanley_rsa",
 
   rmq_host: '127.0.0.1',
   rmq_vhost: nil,
