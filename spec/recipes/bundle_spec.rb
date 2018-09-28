@@ -40,7 +40,7 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0'],
+    'centos' => ['7.5'],
   }
 
   platforms.each do |platform, versions|
@@ -60,8 +60,8 @@ q5MwK3rNIoQ1EBTc7DVIVm9WV11Py3x7FfZb4eQzhFPZFQsV9n0=
           expect(chef_run.node['stackstorm']['user']['authorized_keys']).to eq([pubkey])
         end
 
-        it 'should include recipe mongodb3::default' do
-          expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('mongodb3::default')
+        it 'should include recipe sc-mongodb::default' do
+          expect_any_instance_of(Chef::Recipe).to receive(:include_recipe).with('sc-mongodb::default')
           chef_run
         end
 

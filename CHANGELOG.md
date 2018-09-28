@@ -1,5 +1,11 @@
 # stackstorm cookbook CHANGELOG
 
+## 0.5.0
+
+ * Migrate from 'mongodb' to 'sc-mongodb' cookbook for Chef 13+ support
+ * Update test kitchen to CentOS 7.5
+ * Cleanups and fixes for ST2 2.9 support, and broken Travis builds
+
 ## 0.4.0
 
  * Update Test kitchen to CentOS 7.2
