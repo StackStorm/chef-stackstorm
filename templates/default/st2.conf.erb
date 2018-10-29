@@ -36,6 +36,12 @@ logging = /etc/st2/logging.exporter.conf
 [garbagecollector]
 logging = /etc/st2/logging.garbagecollector.conf
 
+[timersengine]
+logging = /etc/st2/logging.timersengine.conf
+
+[workflow_engine]
+logging = /etc/st2/logging.workflowengine.conf
+
 [auth]
 host = <%= @auth_host %>
 port = <%= @auth_port %>

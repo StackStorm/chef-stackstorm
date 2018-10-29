@@ -10,10 +10,10 @@ describe 'stackstorm::config' do
 
 [api]
 # Host and port to bind the API server.
-host = 0.0.0.0
+host = 127.0.0.1
 port = 9101
 logging = /etc/st2/logging.api.conf
-mask_secrets = true
+mask_secrets = True
 # allow_origin is required for handling CORS in st2 web UI.
 # allow_origin = http://myhost1.example.com:3000,http://myhost2.example.com:3000
 allow_origin = *
@@ -43,8 +43,14 @@ logging = /etc/st2/logging.exporter.conf
 [garbagecollector]
 logging = /etc/st2/logging.garbagecollector.conf
 
+[timersengine]
+logging = /etc/st2/logging.timersengine.conf
+
+[workflow_engine]
+logging = /etc/st2/logging.workflowengine.conf
+
 [auth]
-host = 0.0.0.0
+host = 127.0.0.1
 port = 9100
 use_ssl = False
 debug = False
@@ -73,7 +79,7 @@ mask_secrets = True
 
 [system_user]
 user = stanley
-ssh_key_file = /home/stanley/.ssh/id_rsa
+ssh_key_file = /home/stanley/.ssh/stanley_rsa
 
 [messaging]
 url = amqp://guest:guest@127.0.0.1:5672/
@@ -93,7 +99,7 @@ db_name = st2
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0'],
+    'centos' => ['7.5'],
   }
 
   platforms.each do |platform, versions|
@@ -152,12 +158,12 @@ db_name = st2
             # https://github.com/StackStorm/st2/blob/master/conf/st2.package.conf
             variables: {
               'api_url' => 'http://127.0.0.1:9101',
-              'api_host' => '0.0.0.0',
+              'api_host' => '127.0.0.1',
               'api_port' => 9101,
               'api_mask_secrets' => true,
               'api_allow_origin' => '*',
 
-              'auth_host' => '0.0.0.0',
+              'auth_host' => '127.0.0.1',
               'auth_port' => 9100,
               'auth_use_ssl' => false,
               'auth_debug' => false,
@@ -173,7 +179,7 @@ db_name = st2
               'log_mask_secrets' => true,
 
               'system_user' => 'stanley',
-              'ssh_key_file' => '/home/stanley/.ssh/id_rsa',
+              'ssh_key_file' => '/home/stanley/.ssh/stanley_rsa',
 
               'rmq_host' => '127.0.0.1',
               'rmq_vhost' => nil,

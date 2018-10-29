@@ -7,7 +7,7 @@ describe 'stackstorm::default' do
 
   platforms = {
     'ubuntu' => ['14.04'],
-    'centos' => ['7.0'],
+    'centos' => ['7.5'],
   }
 
   platforms.each do |platform, versions|
@@ -20,7 +20,7 @@ describe 'stackstorm::default' do
           chef_run
         end
 
-        it 'should install pacakge "st2"' do
+        it 'should install package "st2"' do
           expect(chef_run).to install_package('st2')
         end
 

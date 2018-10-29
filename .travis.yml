@@ -2,13 +2,6 @@
 sudo: required
 services: docker
 
-addons:
- apt:
-   sources:
-     - chef-stable-precise
-   packages:
-     - chefdk
-
 # Don't `bundle install`
 install: echo "skip bundle install"
 
@@ -20,11 +13,14 @@ env:
   matrix:
     - SUITE=default
     - SUITE=integration:kitchen:default-ubuntu-1404
-    - SUITE=integration:kitchen:default-centos-72
+    - SUITE=integration:kitchen:default-centos-75
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
   - sudo iptables -L DOCKER || sudo iptables -N DOCKER
+  # ChefDK no longer available via APT repo
+  - wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/14.04/chefdk_3.2.30-1_amd64.deb
+  - sudo dpkg -i chefdk_3.2.30-1_amd64.deb
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - /opt/chefdk/bin/chef gem install kitchen-docker
 
