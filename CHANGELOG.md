@@ -1,5 +1,8 @@
 # stackstorm cookbook CHANGELOG
 
+## In Development
+ * Add new service 'st2scheduler' introduced since st2 'v3.0'
+
 ## 0.5.0
 
  * Migrate from 'mongodb' to 'sc-mongodb' cookbook for Chef 13+ support
