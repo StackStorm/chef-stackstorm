@@ -29,7 +29,7 @@ script:
   - /opt/chefdk/bin/cookstyle --version
   - /opt/chefdk/bin/foodcritic --version
   - /opt/chefdk/bin/kitchen --version
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/bin/chef exec rake ${SUITE}
+  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml CHEF_LICENSE=accept /opt/chefdk/bin/chef exec rake ${SUITE}
 
 notifications:
   # Post build failures to '#chef' channel in 'stackstorm-community' Slack
