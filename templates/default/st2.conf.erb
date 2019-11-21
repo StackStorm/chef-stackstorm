@@ -50,10 +50,10 @@ debug = <%= @auth_debug %>
 enable = <%= @auth_enable %>
 logging = /etc/st2/logging.auth.conf
 
-mode = standalone
+mode = <%= @auth_mode %>
 # Note: Settings bellow are only used in "standalone" mode
-backend = flat_file
-backend_kwargs = {"file_path": "<%= @auth_standalone_file %>"}
+backend = <%= @auth_backend %>
+backend_kwargs = <%= Chef::JSONCompat.to_json(@auth_backend_kwargs) %>
 
 # Base URL to the API endpoint excluding the version (e.g. http://myhost.net:9101/)
 api_url = <%= @api_url %>
