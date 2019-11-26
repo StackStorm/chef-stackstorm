@@ -4,7 +4,7 @@ maintainer_email 'info@stackstorm.com'
 license 'Apache-2.0'
 description 'Installs/Configures stackstorm'
 long_description 'Installs/Configures stackstorm'
-version '0.6.0'
+version '0.7.0'
 
 supports 'ubuntu', '= 14.04'
 supports 'redhat', '~> 7.5'
@@ -24,7 +24,6 @@ depends 'packagecloud'
 depends 'postgresql', '=6.1.1'
 depends 'rabbitmq'
 depends 'yum'
-depends 'yum-epel'
 
 source_url 'https://github.com/StackStorm/chef-stackstorm' if respond_to?(:source_url)
 issues_url 'https://github.com/StackStorm/chef-stackstorm/issues' if respond_to?(:issues_url)
