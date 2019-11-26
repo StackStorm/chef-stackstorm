@@ -2,6 +2,9 @@
 
 ## In Development
 
+## 0.7.0
+
+ * Changed st2.conf template to handle different st2auth settings
 
 ## 0.6.0
 

@@ -15,7 +15,9 @@ default['stackstorm']['config'] = {
   auth_use_ssl: false,
   auth_debug: false,
   auth_enable: true,
-  auth_standalone_file: '/etc/st2/htpasswd',
+  auth_mode: 'standalone',
+  auth_backend: 'flat_file',
+  auth_backend_kwargs: { file_path: '/etc/st2/htpasswd' },
 
   syslog_enabled: false,
   syslog_host: '127.0.0.1',
