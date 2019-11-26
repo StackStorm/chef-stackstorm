@@ -24,6 +24,7 @@ depends 'packagecloud'
 depends 'postgresql', '=6.1.1'
 depends 'rabbitmq'
 depends 'yum'
+depends 'yum-epel'
 
 source_url 'https://github.com/StackStorm/chef-stackstorm' if respond_to?(:source_url)
 issues_url 'https://github.com/StackStorm/chef-stackstorm/issues' if respond_to?(:issues_url)
