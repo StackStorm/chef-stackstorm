@@ -170,7 +170,7 @@ db_name = st2
               'auth_enable' => true,
               'auth_mode' => 'standalone',
               'auth_backend' => 'flat_file',
-              'auth_backend_kwargs' => { file_path: '/etc/st2/htpasswd' },
+              'auth_backend_kwargs' => { 'file_path' => '/etc/st2/htpasswd' },
 
               'syslog_enabled' => false,
               'syslog_host' => '127.0.0.1',
