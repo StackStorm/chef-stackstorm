@@ -1,8 +1,6 @@
 # stackstorm cookbook CHANGELOG
 
 ## In Development
-## 0.7.1
- * Updated recipes and tests to handle new st2auth settings.
 
 ## 0.7.0
 
