@@ -1,3 +1,9 @@
+> **DEPRECATED!**  
+> Due to low interest from the StackStorm Community `chef-stackstorm` cookbook support and development is discontinued.
+>
+> **Help Wanted!**  
+If you're using this deployment method and interested in maintaining it, please contact [StackStorm project Owners](https://github.com/StackStorm/st2/blob/master/OWNERS.md).
+
 # StackStorm Chef Cookbook
 [![Build Status](https://travis-ci.org/StackStorm/chef-stackstorm.svg)](https://travis-ci.org/StackStorm/chef-stackstorm)
 [![Chef cookbook at Supermarket](https://img.shields.io/cookbook/v/stackstorm.svg?maxAge=2592000)](https://supermarket.chef.io/cookbooks/stackstorm)
